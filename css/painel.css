@@ -1,0 +1,11 @@
+.altura-painel {
+    height: 800px;
+}
+
+@media (max-width: 1024px) {
+
+    .altura-painel {
+        height: auto !important;
+    }
+
+}

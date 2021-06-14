@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Sistema de Gerenciamento">
+    <meta name="author" content="KD devs" />
+    <meta name="keywords" content="kd theme template">
+    <!--  <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <!-- Title Page-->
+    <title>Login</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="css/font-face.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/theme.css" rel="stylesheet" media="all">
+    <style>
+        .container-fluid {
+            height: 1000px;
+        }
+    </style>
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container-fluid  pb-5 container-fluid-burguer">
+
+                <div class="login-wrap ">
+                    <div class="bg-white" style="border: gray 1px solid;">
+                        <h2 class="text-info  text-center pt-2 mb-2">LOGIN</h2>
+                        <div class="login-logo bg-black">
+                            <a href="#">
+                                <img src="./images/kd_sistema_blue.png" alt="KD Sistema">
+                            </a>
+                        </div>
+                        <div class="login-form ml-3 mr-3 login-content bg-burguer">
+                            <form action="" method="post">
+                                <div class="form-group pt-2  font-weight-bold">
+                                    <label>Email </label>
+                                    <input class="au-input au-input--full border-input border-input" type="email"
+                                        name="email" placeholder="Email" id="email" required autocomplete="email">
+                                </div>
+                                <div class="form-group  font-weight-bold">
+                                    <label>Senha</label>
+                                    <input class="au-input au-input--full border-input" type="password" name="password"
+                                        placeholder="Senha" id="password" autocomplete="current-password" required>
+                                </div>
+                                <div class="login-checkbox font-weight-bold ">
+                                    <label class="">
+                                        <input type="checkbox" name="remember" id="remember">
+                                        Lembrar-me
+                                    </label>
+                                    <label class="text-dark">
+                                        <a href="#">Esqueceu a Senha?</a>
+                                    </label>
+                                </div>
+                                <div class="text-center" id="imgLoad">
+                                    <img width="100"
+                                        src="https://pa1.narvii.com/6593/bfaad11dcedb659f56826e8883fe7cc15403fd85_00.gif"
+                                        alt="" srcset="">
+                                </div>
+                                <h4 class="text-center text-danger" id="errolog">Usuário ou senha Inválidos!</h4>
+                                <div class="mt-2">
+                                    <button class="au-btn au-btn--block btn bg-success m-b-20" type="button" id="login">
+                                        <b class="">
+                                            Entrar</b>
+                                    </button>
+                                </div>
+
+                            </form>
+                            <div class="register-link pb-5">
+                                <h6>
+                                    Não tem uma conta?
+                                    <a href="register.html" class="">Cadastre-se aqui</a>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--MODAL-->
+        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+            id="errorModal">
+            <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content ">
+                    <div class="modal-header bg-black" style="color: aliceblue;">
+                        <h5 class="modal-title text-white">Error Login</h5>
+                        <button type="button" class="close text-white " data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="text-white">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body ">
+                        <h4 class="text-center">Email ou Senha Inválidos!</h4>
+                        <div class="gif" id="gif"></div>
+                    </div>
+
+                    <div class="modal-footer justify-content-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+    <script src="js/utils/jquery.cookie.js"></script>
+    <script>
+        $("#imgLoad").hide();
+        $('#errolog').hide();
+
+        $("#login").click(function () {
+            $('#errolog').hide();
+
+            var obj = {
+                email: '',
+                password: ''
+            }
+
+            obj.email = $("#email").val();
+            obj.password = $("#password").val();
+
+            if (obj.email == "") {
+                return $("#errorModal").modal("show")
+            } else if (obj.password == "") {
+                return $("#errorModal").modal("show")
+            };
+            // var post_url = "http://localhost:3000/user/login";
+
+            let post_url = "https://kd-gerenciador.herokuapp.com/user/login";
+            $("#imgLoad").show();
+
+            $.ajax({
+                    url: post_url,
+                    type: 'POST',
+                    data: obj,
+
+                }).done(function (response) {
+
+                    if (response) {
+                        sessionStorage.setItem("user", JSON.stringify(response));
+                        window.location.href = "index.html";
+                    }
+                })
+                .fail(function (response) {
+                    $("#imgLoad").hide();
+                    //  $('#errolog').html("");
+                    $('#errolog').text(response[0]);
+                    $('#errolog').show();
+
+                });
+        });
+
+
+        $(document).ready(function () {
+
+            var remember = $.cookie('remember');
+            if (remember == 'true') {
+                $('#remember' ).prop('checked', true);
+                var email = $.cookie('email');
+                var password = $.cookie('password');
+                // autofill the fields
+                $('#email').val(email);
+                $('#password').val(password);
+            }
+
+
+            $("#login").click(function () {
+                if ($('#remember').is(':checked')) {
+                  
+            
+                    var email = $('#email').val();
+                    var password = $('#password').val();
+
+                    // set cookies to expire in 14 days
+                    $.cookie('email', email, {
+                        expires: 14
+                    });
+                    $.cookie('password', password, {
+                        expires: 14
+                    });
+                    $.cookie('remember', true, {
+                        expires: 14
+                    });
+                } else {
+                    // reset cookies
+                    $.cookie('email', null);
+                    $.cookie('password', null);
+                    $.cookie('remember', null);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+<!-- end document-->

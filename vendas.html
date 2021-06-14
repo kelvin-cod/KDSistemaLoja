@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags-->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="au theme template" />
+  <meta name="author" content="Kelvin/Diogo" />
+  <meta name="keywords" content="au theme template" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <!-- Title Page-->
+  <title>Vendas</title>
+
+  <!-- Fontfaces CSS-->
+  <link href="css/font-face.css" rel="stylesheet" media="all" />
+  <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all" />
+
+  <!-- Bootstrap CSS-->
+  <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all" />
+
+  <!-- Vendor CSS-->
+  <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/wow/animate.css" rel="stylesheet" media="all" />
+  <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/slick/slick.css" rel="stylesheet" media="all" />
+  <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+  <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all" />
+  <link rel="apple-touch-icon" href="./images/icons/icon-57x57.png" />
+  <!-- Main CSS-->
+  <link href="css/theme.css" rel="stylesheet" media="all" />
+  <link href="css/vendas.css" rel="stylesheet" media="all" />
+  <link rel="stylesheet" href="./css/bootstrap.table-editor.css">
+  <!-- Jquery JS-->
+  <script src="vendor/jquery-3.2.1.min.js"></script>
+</head>
+
+<body class="animsition">
+  <div class="page-wrapper">
+
+    <!-- HEADER MOBILE-->
+    <div class="navbar-mobile-html"></div>
+    <!-- END HEADER MOBILE-->
+
+    <!-- MENU SIDEBAR-->
+    <div class="menu-html"></div>
+    <!-- END MENU SIDEBAR-->
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+
+      <!-- HEADER DESKTOP-->
+      <div class="navbar-desktop-html"></div>
+      <!-- HEADER DESKTOP-->
+
+      <!-- MAIN CONTENT-->
+      <div class="main-content">
+        <div class="section__content section__content--p30">
+          <div class="container-fluid " style="background-color: rgb(230, 230, 230);">
+            <div class="row">
+              <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <div class="login-logo1 card-header1 bg-info text-center " style="border: 1px solid grey;">
+
+                  <h2 class="text-center text-white ">Balcão de Vendas</h2>
+
+                </div>
+                <form method="post" id="Form_vendas">
+                  <div class="balcao-form" style="border: 1px solid grey;">
+                    <div class="table-responsive table-responsive-data2">
+                      <table class="table table-data2 ml-3 mt-4 table-bordered  bg-secondary table-hover"
+                        id="Tabela_vendas">
+                        <thead>
+                          <div class="row ">
+                            <tr class="text-center text-white">
+                              <th>ID</th>
+                              <th>Descrição Produto</th>
+                              <th>Obs</th>
+                              <th>R$ Unitário</th>
+                              <th>Quantidade</th>
+                              <th>SubTotal</th>
+                            </tr>
+                          </div>
+                          <div class="row justify-content-center  ">
+                            <div class=" col-md-2 mt-3 ml-3 col-12 text-center ">
+
+                              <p class="btn btn-secondary align-middle " id="fecharBalcao">
+                                Fechar Balcão
+                              </p>
+                            </div>
+                            <div class="form-group col-md-2 offset-md-5 col-5 text-center">
+                              <label for="">Data</label>
+                              <input class="au-input au-input--full bg-white text-center top-balcao" type="text"
+                                name="data" placeholder="Data" disabled id="Data_vendas"
+                                style="border: 1px solid rgb(0, 0, 0);">
+                            </div>
+                            <div class="form-group text-center col-5 col-md-2 ">
+                              <label for=""> Pedido</label>
+                              <input class="au-input au-input--full  text-center top-balcao" type="number"
+                                name="numero_pedido" value="0000" disabled id="Numero_pedido"
+                                style="border: 1px solid rgb(0, 0, 0); background-color: gold;">
+                            </div>
+                          </div>
+                        </thead>
+
+                        <div class="section__content section__content--p30">
+                          <div class="container-fluid bg-burguer">
+                            <div class="row">
+                              <div class="form-group col-md-5">
+                                <div>
+                                  <label>Cliente </label>
+                                  <button type="button" class="btn btn-success" id="btnCliente" type="button"
+                                    data-toggle="collapse" data-target="#novoCliente" aria-expanded="false"
+                                    aria-controls="novoCliente">
+                                    <i class="zmdi zmdi-plus"></i>
+                                  </button>
+                                </div>
+                                <div class="collapse" id="novoCliente">
+                                  <div class="row">
+                                    <div class="form-group col-md-6">
+                                      <label>Cliente</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="cliente"
+                                        placeholder="Nome Cliente" id="nome">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                      <label>E-mail</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="email"
+                                        placeholder="E-mail" id="email">
+                                    </div>
+                                  </div>
+                                  <div class="row">
+                                    <div class="form-group col-md-6">
+                                      <label>CEP</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="cep" placeholder="CEP"
+                                        id="cep">
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                      <label>Número</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="numero"
+                                        placeholder="Número" id="numero">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                      <label>Endereço</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="rua" placeholder="Rua"
+                                        id="endereco">
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="form-group col-md-5">
+                                      <label>Bairro</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="bairro"
+                                        placeholder="Bairro" id="bairro">
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                      <label>Cidade</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="cidade"
+                                        placeholder="Cidade" id="cidade">
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                      <label>Estado</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="Uf" placeholder="Estado"
+                                        id="uf">
+                                    </div>
+                                  </div>
+
+                                  <div class="row">
+                                    <div class="form-group col-md-6 col-6">
+                                      <label>Celular</label>
+                                      <input class="au-input au-input--full border-input"
+                                       type="text" name="Celular"
+                                        placeholder="Celular" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}"
+                                        id="celular">
+                                    </div>
+
+                                    <div class="form-group col-md-6  col-6">
+                                      <label>Telefone</label>
+                                      <input class="au-input au-input--full border-input" type="text"
+                                       placeholder="Telefone"
+                                        id="telefone" pattern="\([0-9]{2}\)[\s][0-9]{4}-[0-9]{4,5}">
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                      <label>Complemento</label>
+                                      <input class="au-input au-input--full border-input" type="text" name="Complemento"
+                                        placeholder="Complemento" id="complemento">
+                                    </div>
+                                      <div class="offset-10 col-10  pr-5">
+                                          <button class="btn btn-primary " type="button" onclick=" enviarCliente()">Salvar</button>
+                                      </div>
+                                  </div>
+                                </div>
+                                <!--
+                                <input class="au-input au-input--full border-input " type="text" name="cliente"
+                                  placeholder="Nome Cliente" >
+-->
+                                <select class="form-control border-input mt-2 " name="Produto" id="Nome_cliente">
+                                  <option value=""></option>
+                                </select>
+
+                              </div>
+
+                              <div class="form-group col-md-2 text-center">
+                                <label for="">Novo Item</label>
+                                <p class="au-btn au-btn-icon text-white bg-success text-center" id="Add_item">
+                                  <i class="zmdi zmdi-plus"></i>item
+                                </p>
+
+                              </div>
+                              <div class=" text-center col-12 col-md-5 ">
+                                <label for="">Tipo</label><br>
+                                <div class="form-check  form-check-inline  text-center">
+                                  <input class="form-check-input border-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                                    value="Consumo" checked>
+                                  <label class="form-check-label" for="exampleRadios1">
+                                    Consumo
+                                  </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                                    value="Entrega">
+                                  <label class="form-check-label" for="exampleRadios2">
+                                    Entrega
+                                  </label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3"
+                                    value="Levar">
+                                  <label class="form-check-label" for="exampleRadios2">
+                                    Levar
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="form-group col-md-5">
+
+                                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1" style="margin-left: 15px;"> -->
+
+                                <label>Produto</label>
+                                <select class="form-control border-input " name="Produto" id="Produto_vendas">
+                                  <option value=""></option>
+                                </select>
+
+                                <input class="au-input au-input--full border-input" type="text" name="observacao"
+                                  placeholder="Obs deste Produto " id="Obs_vendas">
+
+                                <div class="form-group mt-1 adicional" id="Adicional" style="display: none;">
+                                  <label>Adicional</label>
+                                  <select class="form-control" name="" id="Adicional_vendas">
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+
+                              </div>
+
+                              <div class="form-group col-md-2 col-6">
+                                <label for="Valor_vendas">R$ Unitário</label>
+
+                                <select class="form-control bg-white 
+                                 seta text-center au-input  au-input--full border-input " name="Valor_vendas"
+                                  id="Valor_vendas" disabled>
+                                  <option value=""></option>
+                                </select>
+                                <div class="form-group  adicional mt-5" style="display: none;">
+                                  <label>R$ Adicional</label>
+
+                                  <select class="form-control bg-white  seta text-center au-input  au-input--full"
+                                    name="" disabled>
+                                    <option value=""></option>
+                                  </select>
+                                </div>
+
+                              </div>
+                              <div class="form-group col-md-2 col-6 text-center">
+                                <label>Quantidade</label>
+                                <input class="au-input au-input--full text-center 
+                                font-weight-bold border-input " type="number" name="quantidade" id="Quantidade_vendas"
+                                  placeholder="Qtd" value="1" min="1">
+                              </div>
+                              <div class="form-group col-md-2 ">
+                                <label>Sub Total</label>
+                                <input class="au-input au-input--full bg-white 
+                                text-center font-weight-bold border-input " type="text" name="sub_total" disabled
+                                  id="Subtotal_vendas" value="0.00">
+                              </div>
+
+                              <!--Tabela-->
+                              <tbody class="text-center text-dark font-weight-bold" id="TabelaComanda">
+
+                              </tbody>
+                      </table>
+                    </div>
+                    <div style="border: 1px grey solid;">
+                    
+                      <div class="row justify-content-center  text-center ">
+                        <div class="form-group offset-md-7 col-md-2 col-5">
+                          <label for="">Total Produtos</label>
+                          <input class="au-input au-input--full bg-white  text-center font_vendas" type="text"
+                            name="total_produtos" value="0" disabled id="Quantidade_total"
+                            style="border: 1px green solid;">
+                        </div>
+                        <div class=" col-md-2 text-center col-5 ">
+                          <label for="">Total Venda</label>
+                          <input class="form-group au-input au-input--full bg-white  text-center font_vendas "
+                            type="text" name="total_geral" value="0.00" disabled id="Total_vendas"
+                            style="border: 1px green solid;">
+                        </div>
+
+                      </div>
+                      <div class="row justify-content-center text-center mt-3">
+                        <div class="form-group offset-md-9 col-md-2 col-6 text-center">
+                          <label>Desconto</label>
+                          <input class="au-input au-input--full text-center font_vendas" type="text" name="desconto"
+                            id="Desconto_vendas" placeholder="0.00" min="0" style="border: 1px green solid;">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group row justify-content-center text-center mt-5 ">
+                      <button type="button" class="btn btn-danger  col-5  col-md-2">
+                        <i class="fas fa-times"></i>
+                        Cancelar
+                      </button>
+                      <button type="button" class="btn btn-success offset-md-2 col-5 col-md-2 btn-confirm"
+                        id="Concluir_vendas" data-toggle="modal">
+                        <i class="fas fa-check"></i>
+                        Concluir
+                      </button>
+
+                    </div>
+
+                  </div>
+                  <div class="alert" role="alert" id="result"></div>
+                </form>
+
+                <!-- END DATA TABLEdata-target="#Modal" -->
+
+              </div>
+            </div>
+            <footer class="footer navbar-fixed-bottom">
+              <div class="row mt-5 bg-black">
+                <div class="col-md-12 ">
+                  <div class="copyright ">
+                    <p>
+                      Copyright © 2020 KD. All rights reserved. <br>
+                      <span class="text-info">KD</span>
+                      <span class="text-info">S</span>istema
+                      <span class="text-info">G</span>erenciador
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </footer>
+            <!--MODAL-->
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
+              id="Modal">
+              <div class="modal-dialog modal-sm modal-dialog-centered">
+                <div class="modal-content ">
+                  <div class="modal-header bg-black" style="color: aliceblue;">
+                    <h5 class="modal-title text-white"> Confirmar Venda ?</h5>
+                    <button type="button" class="close text-white " data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body m-5">
+                    <h3 class="text-center" id="confirmar">Confirmar Venda?</h3>
+                    <div class="gif" id="gif"></div>
+                  </div>
+
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger" id="modal-btn-nao" data-dismiss="modal">Não</button>
+                    <button type="button" class="btn btn-success" id="modal-btn-sim">Sim</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--FIM MODAL-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END MAIN CONTENT-->
+    <!-- END PAGE CONTAINER-->
+  </div>
+  </div>
+
+  <!-- Bootstrap JS-->
+
+  <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+  <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+  <!-- Vendor JS       -->
+  <script src="vendor/slick/slick.min.js"></script>
+  <script src="vendor/wow/wow.min.js"></script>
+  <script src="vendor/animsition/animsition.min.js"></script>
+  <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+  <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+  <script src="vendor/counter-up/jquery.counterup.min.js"></script>
+  <script src="vendor/circle-progress/circle-progress.min.js"></script>
+  <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+  <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+  <script src="vendor/select2/select2.min.js"></script>
+  <script src="js/utils/jquery-ui.js"></script>
+  <script src="js/allpages.js"> </script>
+
+  <!-- Main JS-->
+  <script src="js/main.js"></script>
+  <script src="./js/bootstrap.table-editor.js"></script>
+
+  <script src="./js/bootstable.js"></script>
+  <script type="text/javascript">
+    $('#Tabela_vendas').SetEditable({
+
+      columnsEd: "2,4"
+
+    });
+  </script>
+   <script src="js/utils/jquery.mask.js"></script>
+   <script src="js/utils/jquery.correios.min.js"></script>
+   <script src="js/utils/jquery.quick.search.js"></script>
+   <script>
+     $("#celular").mask("(00) 00000-0000");
+     $("#telefone").mask("(00) 0000-0000");
+     $("#modalCelular").mask("(00) 0000-0000");
+     /*função cep correios*/
+     $("#cep").mask("00000-000");
+     var typingTimer; //timer identifier
+     var doneTypingInterval = 1000; //time in ms, 1 second for example
+     $("#cep").keydown(function () {
+       clearTimeout(typingTimer);
+       if ($('#cep').val) {
+         typingTimer = setTimeout(doneTyping, doneTypingInterval);
+       }
+     })
+ 
+     function doneTyping() {
+       let cep = $('#cep').val();
+       let httpCorreio =
+         ` https://webmaniabr.com/api/1/cep/${cep}/?app_key=Fx03yD7mTXbZ57X7LtdGjUW3l5eswMF9&app_secret=6WcBEPTDX9wzl90y7uBSaruT6tohhqWJe2I3wDYYI1s6aAi4`;
+ 
+       $.ajax({
+         url: httpCorreio,
+         type: 'GET'
+       }).then(function (response) { //
+         $("#bairro").val(response.bairro);
+         $("#endereco").val(response.endereco);
+         $("#cidade").val(response.cidade);
+         $("#uf").val(response.uf);
+       });
+     }
+   </script>
+  <script src="js/vendas.js"> </script>
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,67 @@
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+  <div class="logo">
+    <a href="#">
+      <img src="././images/kd_sistema_blue.png" alt="KD Sistema">
+    </a>
+  </div>
+  <div class="menu-sidebar__content js-scrollbar1 text-white">
+    <nav class="navbar-sidebar">
+      <ul class="list-unstyled navbar__list">
+        <li class="has-sub">
+          <a href="index.html">
+            <i class="fas fa-tachometer-alt text-white"></i>Painel de Controle</a>
+        </li>
+        <li n>
+          <a href="vendas.html"><i class="fas fa-money-bill-alt"></i>Vendas
+          </a>
+        </li>
+        <li>
+          <a href="estoque.html"> <i class="fas fa-box"></i>Estoque</a>
+        </li>
+        <li>
+          <a href="table.html"> <i class="fas fa-table"></i>Tabelas</a>
+        </li>
+
+        <li>
+          <a href="clientes.html"> <i class="fas fa-user"></i>Clientes
+            <span class="badge badge-pill badge-success">Novo</span>
+          </a>
+
+        </li>
+
+        <li>
+          <a href="#"> <i class="fas fa-chart-bar"></i>Gráficos
+            <span class="badge badge-pill badge-warning">Em Breve</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class="fas fa-calendar-alt"></i>Calendário
+            <span class="badge badge-pill badge-warning">Em Breve</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <script>
+    // Sublist Sidebar
+    try {
+      var arrow = $('.js-arrow');
+      arrow.each(function () {
+        var that = $(this);
+        that.on('click', function (e) {
+          e.preventDefault();
+          that.find(".arrow").toggleClass("up");
+          that.toggleClass("open");
+          that.parent().find('.js-sub-list').slideToggle("300");
+        });
+      });
+
+    } catch (error) {
+      console.log(error);
+    }
+  </script>
+</aside>
+<!-- END MENU SIDEBAR-->

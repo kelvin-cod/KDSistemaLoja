@@ -288,12 +288,12 @@ section {
 }
 
 .container {
-    background-image: url("../images/Background.png") !important;
+  /*  background-image: url("../images/Background.png") !important;*/
 
 }
 
 .container-fluid-burguer {
-    background-image: url("../images/Background.png") !important;
+   background-image: url("../images/Background.png") !important;
 
 }
 
@@ -403,13 +403,13 @@ select {
 }
 
 .bg-burguer {
-    background-image: url('../images/Background.png') !important;
+   /* background-image: url('../images/Background.png') !important;*/
     background-repeat: no-repeat !important;
     background-position: top !important;
 }
 
 .bg-burguer-center {
-    background-image: url('../images/Background.png') !important;
+   /*   background-image: url('../images/Background.png') !important;*/
     background-repeat: no-repeat !important;
     background-position: center !important;
 }

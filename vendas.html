@@ -46,8 +46,8 @@
     <div class="navbar-mobile-html"></div>
     <!-- END HEADER MOBILE-->
 
-    <!-- MENU SIDEBAR-->
-    <div class="menu-html"></div>
+    <!-- MENU SIDEBAR
+    <div class="menu-html"></div>-->
     <!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
@@ -108,8 +108,9 @@
                         </thead>
 
                         <div class="section__content section__content--p30">
-                          <div class="container-fluid bg-burguer">
+                          <div class="container-fluid">
                             <div class="row">
+                                  <!--
                               <div class="form-group col-md-5">
                                 <div>
                                   <label>Cliente </label>
@@ -194,23 +195,18 @@
                                       </div>
                                   </div>
                                 </div>
-                                <!--
+                            
                                 <input class="au-input au-input--full border-input " type="text" name="cliente"
                                   placeholder="Nome Cliente" >
--->
+
                                 <select class="form-control border-input mt-2 " name="Produto" id="Nome_cliente">
                                   <option value=""></option>
                                 </select>
 
                               </div>
-
-                              <div class="form-group col-md-2 text-center">
-                                <label for="">Novo Item</label>
-                                <p class="au-btn au-btn-icon text-white bg-success text-center" id="Add_item">
-                                  <i class="zmdi zmdi-plus"></i>item
-                                </p>
-
-                              </div>
+-->
+                        
+                              <!--
                               <div class=" text-center col-12 col-md-5 ">
                                 <label for="">Tipo</label><br>
                                 <div class="form-check  form-check-inline  text-center">
@@ -237,6 +233,7 @@
                                   </label>
                                 </div>
                               </div>
+                              -->
                             </div>
                             <div class="row">
                               <div class="form-group col-md-5">
@@ -290,7 +287,13 @@
                                 text-center font-weight-bold border-input " type="text" name="sub_total" disabled
                                   id="Subtotal_vendas" value="0.00">
                               </div>
+                              <div class="form-group col-md-2 offset-5 text-center">
+                                <label for="">Novo Item</label>
+                                <p class="au-btn au-btn-icon text-white bg-success text-center" id="Add_item">
+                                  <i class="zmdi zmdi-plus"></i>item
+                                </p>
 
+                              </div>
                               <!--Tabela-->
                               <tbody class="text-center text-dark font-weight-bold" id="TabelaComanda">
 

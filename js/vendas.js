@@ -4,6 +4,7 @@
         idProduto: 0,
         Descricao: "",
         Obs: "",
+        Desconto: 0,
         Valor_venda: 0,
         Quantidade: 0,
         SubTotal: 0
@@ -112,13 +113,18 @@
     $('#Produto_vendas').change(function () {
         idProduto = ($(this).val());
 
-        $("#Valor_vendas").val(($(this).val()));
-
+        $("#Valor_vendas").val($(this).val());
+        $("#imgProduto").html("")
+        $("#imgProduto").append(`  <img class="previewProd" src="https://www.imigrantesbebidas.com.br/bebida/images/products/full/1844_Refrigerante_Coca_Cola_Pet_600_ml.jpg" alt="">`)
+        //
+        //
         quantidade = parseFloat($("#Quantidade_vendas").val());
         valor = parseFloat($("#Valor_vendas :selected").text());
 
         soma = (quantidade * valor).toFixed(2);
-
+        if (isNaN(soma)){
+            soma = 0
+        }
         $("#Subtotal_vendas").val(soma);
 
         var selected = $("option:selected", this);
@@ -159,6 +165,7 @@
         Comanda.Obs = $('#Obs_vendas').val();
         Comanda.Valor_venda = valor;
         Comanda.Quantidade = parseInt(quantidade);
+        Comanda.Desconto = parseFloat($('#Desconto_vendas').val().replace(",", "."));
         Comanda.SubTotal = soma;
         Pedidos.push(Comanda);
 
@@ -183,12 +190,14 @@
     });
     /**----------------------------------------------------------------------------------------------------- */
     function salvar(item) {
+
+        if (isNaN(item.Desconto)) {
+            item.Desconto = 0
+        }
         trHTML =
-            '<tr id="tbl_tr_' + item.idComanda + '"><td>' + item.idProduto +
+            '<tr id="tbl_tr_' + item.idComanda + '"><td>' + item.Quantidade +
             '</td><td>' + item.Descricao +
-            '</td><td id="tbl_obs_' + item.idProduto + '">' + item.Obs +
-            '</td><td>' + parseFloat(item.Valor_venda).toFixed(2) +
-            '</td><td id="tbl_' + item.idProduto + '">' + item.Quantidade +
+            '</td><td>' + parseFloat(item.Desconto.toFixed(2)) +
             '</td><td id="tbl_subtotal_' + item.idProduto + '">' + item.SubTotal +
             '</td><td> ' +
             '<div class="table-data-feature">' +
@@ -196,82 +205,106 @@
             '<p class="item btn" data-toggle="tooltip" onclick="editar(' + item.idProduto + ')" ' +
             ' data-placement="top" title="Edit" id="bEdit" >' +
             */
-            '<p class="item btn" data-toggle="tooltip" onclick="rowEdit(this)" ' +
-            'data-placement="top" title="Edit" id="bEdit" >' +
+            '<p class="item btn" data-toggle="tooltip" onclick="editar(' + item.idComanda + ', ' + item.idProduto + ') " ' +
+            'data-placement="top" title="Edit"  >' +
             '<i class="zmdi zmdi-edit"></i></p>' +
-            ' <p id="bAcep" class="btn  item"data-toggle="tooltip"  ' +
-            'style="display:none;" onclick="rowAcep(this); editar(' + item.idProduto + ') "> ' +
-            '<i class="zmdi zmdi-save"></i> ' +
-            '</p> ' +
-
             '</div></td>' +
-            '<td> <div class="table-data-feature">' +
-            '<p class="item btn" id="bElim" data-toggle="tooltip" ' +
-            ' data-placement="top" title="Delete" onclick="excluir( ' + item.idComanda + ', ' + item.idProduto + ');rowElim(this);">' +
-            '<i class="zmdi zmdi-delete"></i>' +
-            '</p> </div></td>' +
             '</tr>';
         return $('#TabelaComanda').append(trHTML);
     }
+    /*
+    <p class="item btn" id="bElim" data-toggle="tooltip" ' +
+            ' data-placement="top" title="Delete" onclick="excluir( ' + item.idComanda + ', ' + item.idProduto + ');rowElim(this);">' +
+            '<i class="zmdi zmdi-delete"></i>' +
+            '</p> 
+    
+    */
     /**----------------------------------------------------------------------------------------------------- */
-    $(Pedidos).change(function () {
-        console.log('aloooooooo');
-
-    })
     /**----------------------------------------------------------------------------------------------------- */
-    function editar(id) {
+    /*  function editar(id) {
 
-        let quantidade_Coluna = parseInt($(`#tbl_${id}`).text());
-        let aux = 0;
-        let nova_soma = 0;
-        let obs_Coluna = $(`#tbl_obs_${id}`).text();
+         let quantidade_Coluna = parseInt($(`#tbl_${id}`).text());
+         let aux = 0;
+         let nova_soma = 0;
+         let obs_Coluna = $(`#tbl_obs_${id}`).text();
 
-        for (let i = 0; i < Pedidos.length; i++) {
-            if (Pedidos[i].idProduto == parseInt(id)) {
+         for (let i = 0; i < Pedidos.length; i++) {
+             if (Pedidos[i].idProduto == parseInt(id)) {
 
-                if (quantidade_Coluna < 0) {
-                    $(`#tbl_${id}`).text(Pedidos[i].Quantidade);
-                    return alert("Quantidade inválida!");
-                }
-                if (Pedidos[i].Quantidade < quantidade_Coluna) {
-                    //quantidade
-                    aux = parseInt(Pedidos[i].Quantidade);
-                    Quantidade_total -= aux; // tira o valor da linha do total
-                    Quantidade_total += quantidade_Coluna; // acrecenta o valor da lina no total
-                    Pedidos[i].Quantidade = quantidade_Coluna; //insere o novo valor no obj pedido
+                 if (quantidade_Coluna < 0) {
+                     $(`#tbl_${id}`).text(Pedidos[i].Quantidade);
+                     return alert("Quantidade inválida!");
+                 }
+                 if (Pedidos[i].Quantidade < quantidade_Coluna) {
+                     //quantidade
+                     aux = parseInt(Pedidos[i].Quantidade);
+                     Quantidade_total -= aux; // tira o valor da linha do total
+                     Quantidade_total += quantidade_Coluna; // acrecenta o valor da lina no total
+                     Pedidos[i].Quantidade = quantidade_Coluna; //insere o novo valor no obj pedido
 
-                    //soma coluna
-                    nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
+                     //soma coluna
+                     nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
 
-                    //valor total
-                    Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
-                    Total += nova_soma; // acrecenta o valor da lina no total
-                    Pedidos[i].SubTotal = nova_soma;
+                     //valor total
+                     Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
+                     Total += nova_soma; // acrecenta o valor da lina no total
+                     Pedidos[i].SubTotal = nova_soma;
 
-                    //atribuiçoes
-                    $("#Total_vendas").val(Total.toFixed(2));
-                    $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
-                    $("#Quantidade_total").val(Quantidade_total);
-                } else if (Pedidos[i].Quantidade > quantidade_Coluna) {
-                    //Quantidade menor
-                    Quantidade_total -= parseInt(Pedidos[i].Quantidade);
-                    Quantidade_total += quantidade_Coluna;
-                    Pedidos[i].Quantidade = quantidade_Coluna;
-                    //soma linha menor
-                    nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
-                    //Valor total
-                    Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
-                    Total += nova_soma; // acrecenta o valor da lina no total
-                    Pedidos[i].SubTotal = nova_soma;
+                     //atribuiçoes
+                     $("#Total_vendas").val(Total.toFixed(2));
+                     $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
+                     $("#Quantidade_total").val(Quantidade_total);
+                 } else if (Pedidos[i].Quantidade > quantidade_Coluna) {
+                     //Quantidade menor
+                     Quantidade_total -= parseInt(Pedidos[i].Quantidade);
+                     Quantidade_total += quantidade_Coluna;
+                     Pedidos[i].Quantidade = quantidade_Coluna;
+                     //soma linha menor
+                     nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
+                     //Valor total
+                     Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
+                     Total += nova_soma; // acrecenta o valor da lina no total
+                     Pedidos[i].SubTotal = nova_soma;
 
-                    $("#Quantidade_total").val(Quantidade_total);
-                    $("#Total_vendas").val(Total.toFixed(2));
-                    $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
-                } else if (obs_Coluna != Pedidos[i].Obs) {
-                    Pedidos[i].Obs = obs_Coluna;
-                }
-            }
-        }
+                     $("#Quantidade_total").val(Quantidade_total);
+                     $("#Total_vendas").val(Total.toFixed(2));
+                     $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
+                 } else if (obs_Coluna != Pedidos[i].Obs) {
+                     Pedidos[i].Obs = obs_Coluna;
+                 }
+             }
+         }
+     }*/
+    function editar(id, idProduto) {
+
+        $("#Quantidade_vendas").val($(`#tbl_tr_${id}>td:nth-child(1)`).text());
+        $("#Subtotal_vendas").val($(`#tbl_tr_${id}>td:nth-child(4)`).text());
+        $("#Desconto_vendas").val($(`#tbl_tr_${id}>td:nth-child(3)`).text());
+
+        //  $("div#Valor_vendas select").val(idProduto);
+        //  $("#Produto_vendas option:selected").val(idProduto);
+
+        //   $(`.id100 option[value=${idProduto}]`).attr('selected','selected');
+        $("div.id100 select").val(idProduto);
+
+        //- $(`#Produto_vendas option:contains(${idProduto})`).attr('selected', true);
+
+        $("#btnAtualizar").html("")
+        $("#btnAtualizar").append(`<div class="row">
+     <div class="form-group col-6 text-center ">
+       <button type="button" class="btn btn-success  w-100">
+         <i class="fas fa-check"></i>
+         Atualizar Produto
+       </button>
+     </div>
+     <div class="form-group col-6 text-center ">
+       <button type="button" class="btn btn-danger  w-100 ">
+         <i class="fas fa-times"></i>
+      Excluir
+       </button>
+     </div>
+   </div>`)
+        //   #tbl_tr_0 > 
     }
     /**----------------------------------------------------------------------------------------------------- */
 
@@ -350,7 +383,7 @@
     $("#modal-btn-sim").click(() => {
         $('#gif').show();
         const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
-   
+
         $("#confirmar").hide();
 
         console.log(Venda)

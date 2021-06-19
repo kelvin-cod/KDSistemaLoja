@@ -60,7 +60,7 @@
       <!-- MAIN CONTENT-->
       <div class="main-content">
         <div class="section__content section__content--p30">
-          <div class="container-fluid " style="background-color: rgb(230, 230, 230);">
+          <div class="container-fluid " style="background-color: rgb(230, 230, 230); height: auto;">
             <div class="row">
               <div class="col-md-12">
                 <!-- DATA TABLE -->
@@ -70,6 +70,7 @@
 
                 </div>
                 <form method="post" id="Form_vendas">
+                  <!--
                   <div class="balcao-form" style="border: 1px solid grey;">
                     <div class="table-responsive table-responsive-data2">
                       <table class="table table-data2 ml-3 mt-4 table-bordered  bg-secondary table-hover"
@@ -85,32 +86,41 @@
                               <th>SubTotal</th>
                             </tr>
                           </div>
-                          <div class="row justify-content-center  ">
+                          <tbody class="text-center text-dark font-weight-bold" id="TabelaComanda">
+
+                          </tbody>
+                        </thead>
+                      </table>
+                      -->
+                  <div class="row justify-content-center  ">
+                    <!--
                             <div class=" col-md-2 mt-3 ml-3 col-12 text-center ">
 
                               <p class="btn btn-secondary align-middle " id="fecharBalcao">
                                 Fechar Balcão
                               </p>
                             </div>
-                            <div class="form-group col-md-2 offset-md-5 col-5 text-center">
-                              <label for="">Data</label>
-                              <input class="au-input au-input--full bg-white text-center top-balcao" type="text"
-                                name="data" placeholder="Data" disabled id="Data_vendas"
-                                style="border: 1px solid rgb(0, 0, 0);">
-                            </div>
-                            <div class="form-group text-center col-5 col-md-2 ">
-                              <label for=""> Pedido</label>
-                              <input class="au-input au-input--full  text-center top-balcao" type="number"
-                                name="numero_pedido" value="0000" disabled id="Numero_pedido"
-                                style="border: 1px solid rgb(0, 0, 0); background-color: gold;">
-                            </div>
-                          </div>
-                        </thead>
+                           
+                    <div class="form-group col-md-2 offset-md-5 col-5 text-center">
+                      <label for="">Data</label>
+                      <input class="au-input au-input--full bg-white text-center top-balcao" type="text" name="data"
+                        placeholder="Data" disabled id="Data_vendas" style="border: 1px solid rgb(0, 0, 0);">
+                    </div>
+                    <div class="form-group text-center col-5 col-md-2 ">
+                      <label for=""> Pedido</label>
+                      <input class="au-input au-input--full  text-center top-balcao" type="number" name="numero_pedido"
+                        value="0000" disabled id="Numero_pedido"
+                        style="border: 1px solid rgb(0, 0, 0); background-color: gold;">
+                    </div>
+                     -->
+                  </div>
 
-                        <div class="section__content section__content--p30">
-                          <div class="container-fluid">
-                            <div class="row">
-                                  <!--
+
+                  <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                      <div class="row mt-4">
+                        <!--<div class="row">
+                                
                               <div class="form-group col-md-5">
                                 <div>
                                   <label>Cliente </label>
@@ -205,8 +215,8 @@
 
                               </div>
 -->
-                        
-                              <!--
+
+                        <!--
                               <div class=" text-center col-12 col-md-5 ">
                                 <label for="">Tipo</label><br>
                                 <div class="form-check  form-check-inline  text-center">
@@ -233,142 +243,334 @@
                                   </label>
                                 </div>
                               </div>
-                              -->
+                            
+                              </div>  -->
+
+                        <div class="col-lg-8">
+                          <div class="form-group id100">
+
+
+                            <label>LOCALIZE UM PRODUTO</label>
+                            <select class="form-control border-input " name="Produto" id="Produto_vendas">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="row">
+                            <div class="col-lg-4 mt-4 col-md-4 col-sm-12">
+                              <div class="bg-secondary " id="imgProduto" style="height: 300px !important;"></div>
+
                             </div>
-                            <div class="row">
-                              <div class="form-group col-md-5">
+                            <div class=" col-md-8 col-lg-8 ">
 
-                                <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1" style="margin-left: 15px;"> -->
+                              <!-- <input type="checkbox" class="form-check-input" id="exampleCheck1" style="margin-left: 15px;"> -->
 
-                                <label>Produto</label>
-                                <select class="form-control border-input " name="Produto" id="Produto_vendas">
-                                  <option value=""></option>
-                                </select>
+                              <div class="form-group ">
 
-                                <input class="au-input au-input--full border-input" type="text" name="observacao"
-                                  placeholder="Obs deste Produto " id="Obs_vendas">
-
-                                <div class="form-group mt-1 adicional" id="Adicional" style="display: none;">
-                                  <label>Adicional</label>
-                                  <select class="form-control" name="" id="Adicional_vendas">
+                                <label>Código</label>
+                                <input class="au-input au-input--full border-input form-control" type="text"
+                                  placeholder=" " id="Cod_vendas" disabled>
+                              </div>
+                              <div class="row">
+                                <div class="form-group col-6">
+                                  <label>Quantidade</label>
+                                  <input class="au-input au-input--full  
+                                    font-weight-bold border-input form-control" type="number" name="quantidade"
+                                    id="Quantidade_vendas" placeholder="Qtd" value="1" min="1">
+                                </div>
+                                <div class="form-group col-6 id100">
+                                  <label for="Valor_vendas">R$ Unitário</label>
+                                  <select class="form-control bg-white seta  au-input  au-input--full border-input "
+                                    name="Valor_vendas" id="Valor_vendas" disabled>
                                     <option value=""></option>
                                   </select>
                                 </div>
-
                               </div>
 
-                              <div class="form-group col-md-2 col-6">
-                                <label for="Valor_vendas">R$ Unitário</label>
+                              <div class="row">
 
-                                <select class="form-control bg-white 
-                                 seta text-center au-input  au-input--full border-input " name="Valor_vendas"
-                                  id="Valor_vendas" disabled>
-                                  <option value=""></option>
-                                </select>
-                                <div class="form-group  adicional mt-5" style="display: none;">
-                                  <label>R$ Adicional</label>
-
-                                  <select class="form-control bg-white  seta text-center au-input  au-input--full"
-                                    name="" disabled>
-                                    <option value=""></option>
-                                  </select>
+                                <div class="form-group col-6 ">
+                                  <label>Desconto</label>
+                                  <input class="au-input au-input--full  
+                                font-weight-bold border-input " type="text" name="desconto" id="Desconto_vendas"
+                                    placeholder="0.00">
                                 </div>
 
+                                <div class="form-group  col-6">
+                                  <label>Sub Total</label>
+                                  <input class="au-input au-input--full bg-white 
+                               font-weight-bold border-input " type="text" name="sub_total" disabled
+                                    id="Subtotal_vendas" value="0.00">
+                                </div>
                               </div>
-                              <div class="form-group col-md-2 col-6 text-center">
-                                <label>Quantidade</label>
-                                <input class="au-input au-input--full text-center 
-                                font-weight-bold border-input " type="number" name="quantidade" id="Quantidade_vendas"
-                                  placeholder="Qtd" value="1" min="1">
-                              </div>
-                              <div class="form-group col-md-2 ">
-                                <label>Sub Total</label>
-                                <input class="au-input au-input--full bg-white 
-                                text-center font-weight-bold border-input " type="text" name="sub_total" disabled
-                                  id="Subtotal_vendas" value="0.00">
-                              </div>
-                              <div class="form-group col-md-2 offset-5 text-center">
-                                <label for="">Novo Item</label>
-                                <p class="au-btn au-btn-icon text-white bg-success text-center" id="Add_item">
-                                  <i class="zmdi zmdi-plus"></i>item
+
+                              <div class="form-group text-center" id="btnAtualizar">
+                                <!--  <label for="">Novo Item</label>-->
+                                <p class="au-btn au-btn-icon text-white bg-dark text-center" id="Add_item">
+                                  <i class="zmdi zmdi-plus"></i>Adicionar Produto
                                 </p>
-
                               </div>
-                              <!--Tabela-->
-                              <tbody class="text-center text-dark font-weight-bold" id="TabelaComanda">
+                            </div>
+
+
+                            <div class="form-group col-md-2 col-6 col-lg-8">
+
+                              <div class="form-group  adicional mt-5" style="display: none;">
+                                <label>R$ Adicional</label>
+
+                                <select class="form-control bg-white  seta text-center au-input  au-input--full" name=""
+                                  disabled>
+                                  <option value=""></option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-4  ">
+                          <div class="mb-5">
+                            <table class="table table-hover">
+                              <thead class="thead-dark text-center">
+                                <tr>
+                                  <th scope="col">Qtd.</th>
+                                  <th scope="col">Produto</th>
+                                  <th scope="col">Desc</th>
+                                  <th scope="col">Preço</th>
+                                  <th scope="col"> </th>
+                                </tr>
+                              </thead>
+                              <tbody class="text-center text-dark " id="TabelaComanda">
 
                               </tbody>
-                      </table>
-                    </div>
-                    <div style="border: 1px grey solid;">
-                    
-                      <div class="row justify-content-center  text-center ">
-                        <div class="form-group offset-md-7 col-md-2 col-5">
-                          <label for="">Total Produtos</label>
-                          <input class="au-input au-input--full bg-white  text-center font_vendas" type="text"
-                            name="total_produtos" value="0" disabled id="Quantidade_total"
-                            style="border: 1px green solid;">
+                            </table>
+                          </div>
+
+
+
+                          <div class="form-group  ">
+
+                            <label>TOTAL PEDIDO</label>
+                            <input
+                              class="text-center au-input text-white au-input--full border-input form-control bg-dark font-weight-bold"
+                              type="text" placeholder="R$0.00" id="Total_vendas" disabled value="R$0.00">
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-6 text-center ">
+                              <button type="button" class="btn btn-warning  w-100">
+                                <i class="fas fa-check"></i>
+                                Aguardar
+                              </button>
+                            </div>
+                            <div class="form-group col-6 text-center ">
+                              <button type="button" class="btn btn-danger  w-100 ">
+                                <i class="fas fa-times"></i>
+                                Cancelar
+                              </button>
+                            </div>
+                          </div>
+                          <div class="form-group text-center">
+                            <!--  <label for="">Novo Item</label>-->
+                            <p class="au-btn au-btn-icon text-white bg-success text-center btn w-100"
+                              id="Concluir_vendas">
+                              <i class="fas fa-check"></i>FINALIZAR VENDA
+                            </p>
+                          </div>
+
+
                         </div>
-                        <div class=" col-md-2 text-center col-5 ">
-                          <label for="">Total Venda</label>
-                          <input class="form-group au-input au-input--full bg-white  text-center font_vendas "
-                            type="text" name="total_geral" value="0.00" disabled id="Total_vendas"
-                            style="border: 1px green solid;">
-                        </div>
+
+                        <!--Tabela-->
+
 
                       </div>
-                      <div class="row justify-content-center text-center mt-3">
-                        <div class="form-group offset-md-9 col-md-2 col-6 text-center">
-                          <label>Desconto</label>
-                          <input class="au-input au-input--full text-center font_vendas" type="text" name="desconto"
-                            id="Desconto_vendas" placeholder="0.00" min="0" style="border: 1px green solid;">
+
+
+                      <div class="row mt-4">
+
+                        <div class="col-lg-6">
+                          <div class="row">
+                            <div class="col-12">
+                              <h3> <i class="zmdi zmdi-money"></i> Forma de Pagamento</h3>
+                              <select class="form-control border-input " name="pagamento" id="Pagamento">
+                                <option value="0"></option>
+                                <option value="1">Dinheiro</option>
+                                <option value="2">Cartão de Crédito</option>
+                                <option value="3">Cartão de Débito</option>
+                              </select>
+                            </div>
+
+                            <div class="mt-2  col-12">
+
+
+                              <div class="row">
+                                <div class="col-7">
+                                  <h3> Total Pago </h3>
+                                  <div class="input-group  ">
+                                    <input class="au-input au-input--full bg-white 
+                                 font-weight-bold border-input form-control w-80" type="text" name="total"
+                                      id="Total_vendas" value="0.00">
+                                    <div class=" input-group-append">
+                                      <button class="btn btn-success">>> Confirmar</button>
+                                    </div>
+
+
+                                  </div>
+                                </div>
+                              </div>
+
+                            </div>
+
+                          </div>
+                          <div class="col-12 mt-4">
+                            <div class="mb-5 ">
+                              <table class="table table-hover">
+                                <thead class="thead-dark text-center">
+                                  <tr>
+                                    <th scope="col">Qtd.</th>
+                                    <th scope="col">Produto</th>
+                                    <th scope="col">Desc</th>
+                                    <th scope="col">Preço</th>
+                                    <th scope="col"> </th>
+                                  </tr>
+                                </thead>
+                                <tbody class="text-center text-dark " id="TabelaComanda">
+
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
                         </div>
+                        <div class="col-lg-6">
+                          <h3><i class="fas fa-percentual"></i> Descontos</h3>
+                          <div class="row">
+
+
+                            <div class="col-lg-6 col-sm-12">
+                              <div class="input-group  ">
+                                <input class="au-input au-input--full bg-white 
+                             font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
+                                  value="0.00">
+
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-12">
+
+                              <div class="input-group  ">
+                                <input class="au-input au-input--full bg-white 
+                             font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
+                                  value="0.00">
+                              </div>
+                            </div>
+
+                          </div>
+                          <h3> <i class="fas fa-bank mt-4"></i>Total</h3>
+                          <div class="row ">
+                            <div class="col-12">
+                              <div class="form-group input-group ">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1"> SUBTOTAL:</span>
+                                </div>
+                                <input class="au-input au-input--full bg-white 
+                           font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
+                                  value="0.00">
+                              </div>
+                              <div class="form-group input-group  ">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon2">DESCONTOS:</span>
+                                </div> 
+                                <input class="au-input au-input--full bg-white 
+                           font-weight-bold border-input form-control " type="text" name="desc" id="desconto_vendas"
+                                  value="0.00">
+                              </div>
+                              <div class="form-group input-group  ">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon3">PAGAMENTOS:</span>
+                                </div>
+                                <input class="au-input au-input--full bg-white 
+                           font-weight-bold border-input form-control " type="text" name="pagamentos" id="pagamentos_vendas"
+                                  value="0.00">
+                              </div>
+                              <div class="form-group input-group  ">
+                                <div class="input-group-prepend 0 ">
+                                  <span class="input-group-text" id="basic-addon3">Troco:</span>
+                                </div>
+                                <input class="au-input au-input--full bg-white 
+                           font-weight-bold border-input form-control " type="text" name="troco" id="troco_vendas"
+                                  value="0.00">
+                              </div>
+                              <div class="form-group input-group  ">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon3">TOTAL a Pagar:</span>
+                                </div>
+                                <input class="au-input au-input--full bg-white 
+                           font-weight-bold border-input form-control " type="text" name="totpagar" id="total_pagar_vendas"
+                                  value="0.00">
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="offset-8">
+                            <button class="btn btn-success">>> Confirmar</button>
+                            <button class="btn btn-success">>> Confirmar</button>
+                          </div>
+                        </div>
+                        <!--
+                      <div>
+
+
+                        <div style="border: 1px grey solid;">
+
+                          <div class="row justify-content-center  text-center ">
+                            <div class="form-group offset-md-7 col-md-2 col-5">
+                              <label for="">Total Produtos</label>
+                              <input class="au-input au-input--full bg-white  text-center font_vendas" type="text"
+                                name="total_produtos" value="0" disabled id="Quantidade_total"
+                                style="border: 1px green solid;">
+                            </div>
+                            <div class=" col-md-2 text-center col-5 ">
+                              <label for="">Total Venda</label>
+                              <input class="form-group au-input au-input--full bg-white  text-center font_vendas "
+                                type="text" name="total_geral" value="0.00" disabled id="Total_vendas"
+                                style="border: 1px green solid;">
+                            </div>
+
+                          </div>
+                          <div class="row justify-content-center text-center mt-3">
+                            <div class="form-group offset-md-9 col-md-2 col-6 text-center">
+                              <label>Desconto</label>
+                              <input class="au-input au-input--full text-center font_vendas" type="text" name="desconto"
+                                id="Desconto_vendas" placeholder="0.00" min="0" style="border: 1px green solid;">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group row justify-content-center text-center mt-5 ">
+                          <button type="button" class="btn btn-danger  col-5  col-md-2">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                          </button>
+                          <button type="button" class="btn btn-success offset-md-2 col-5 col-md-2 btn-confirm"
+                            id="Concluir_vendas" data-toggle="modal">
+                            <i class="fas fa-check"></i>
+                            Concluir
+                          </button>
+
+                        </div>
+                      </div>-->
                       </div>
-                    </div>
-                    <div class="form-group row justify-content-center text-center mt-5 ">
-                      <button type="button" class="btn btn-danger  col-5  col-md-2">
-                        <i class="fas fa-times"></i>
-                        Cancelar
-                      </button>
-                      <button type="button" class="btn btn-success offset-md-2 col-5 col-md-2 btn-confirm"
-                        id="Concluir_vendas" data-toggle="modal">
-                        <i class="fas fa-check"></i>
-                        Concluir
-                      </button>
-
-                    </div>
-
-                  </div>
-                  <div class="alert" role="alert" id="result"></div>
+                      <div class="alert" role="alert" id="result"></div>
                 </form>
 
                 <!-- END DATA TABLEdata-target="#Modal" -->
 
               </div>
             </div>
-            <footer class="footer navbar-fixed-bottom">
-              <div class="row mt-5 bg-black">
-                <div class="col-md-12 ">
-                  <div class="copyright ">
-                    <p>
-                      Copyright © 2020 KD. All rights reserved. <br>
-                      <span class="text-info">KD</span>
-                      <span class="text-info">S</span>istema
-                      <span class="text-info">G</span>erenciador
 
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-            </footer>
             <!--MODAL-->
             <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true"
               id="Modal">
               <div class="modal-dialog modal-sm modal-dialog-centered">
                 <div class="modal-content ">
                   <div class="modal-header bg-black" style="color: aliceblue;">
-                    <h5 class="modal-title text-white"> Confirmar Venda ?</h5>
+                    <h5 class="modal-title text-white"> Confirmar Venda </h5>
                     <button type="button" class="close text-white " data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -387,6 +589,24 @@
             </div>
             <!--FIM MODAL-->
           </div>
+
+          <!--
+          <footer class="footer navbar-fixed-bottom mt-5">
+            <div class="row mt-5 bg-black">
+              <div class="col-md-12 ">
+                <div class="copyright ">
+                  <p>
+                    Copyright © 2021 KD. All rights reserved. <br>
+                    <span class="text-info">KD</span>
+                    <span class="text-info">S</span>istema
+                    <span class="text-info">G</span>erenciador
+
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </footer>-->
         </div>
       </div>
     </div>
@@ -424,41 +644,43 @@
       columnsEd: "2,4"
 
     });
+    $("#logo").show()
   </script>
-   <script src="js/utils/jquery.mask.js"></script>
-   <script src="js/utils/jquery.correios.min.js"></script>
-   <script src="js/utils/jquery.quick.search.js"></script>
-   <script>
-     $("#celular").mask("(00) 00000-0000");
-     $("#telefone").mask("(00) 0000-0000");
-     $("#modalCelular").mask("(00) 0000-0000");
-     /*função cep correios*/
-     $("#cep").mask("00000-000");
-     var typingTimer; //timer identifier
-     var doneTypingInterval = 1000; //time in ms, 1 second for example
-     $("#cep").keydown(function () {
-       clearTimeout(typingTimer);
-       if ($('#cep').val) {
-         typingTimer = setTimeout(doneTyping, doneTypingInterval);
-       }
-     })
- 
-     function doneTyping() {
-       let cep = $('#cep').val();
-       let httpCorreio =
-         ` https://webmaniabr.com/api/1/cep/${cep}/?app_key=Fx03yD7mTXbZ57X7LtdGjUW3l5eswMF9&app_secret=6WcBEPTDX9wzl90y7uBSaruT6tohhqWJe2I3wDYYI1s6aAi4`;
- 
-       $.ajax({
-         url: httpCorreio,
-         type: 'GET'
-       }).then(function (response) { //
-         $("#bairro").val(response.bairro);
-         $("#endereco").val(response.endereco);
-         $("#cidade").val(response.cidade);
-         $("#uf").val(response.uf);
-       });
-     }
-   </script>
+  <!--
+  <script src="js/utils/jquery.mask.js"></script>
+  <script src="js/utils/jquery.correios.min.js"></script>
+  <script src="js/utils/jquery.quick.search.js"></script>
+  <script>
+    $("#celular").mask("(00) 00000-0000");
+    $("#telefone").mask("(00) 0000-0000");
+    $("#modalCelular").mask("(00) 0000-0000");
+    /*função cep correios*/
+    $("#cep").mask("00000-000");
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 1000; //time in ms, 1 second for example
+    $("#cep").keydown(function () {
+      clearTimeout(typingTimer);
+      if ($('#cep').val) {
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+      }
+    })
+
+    function doneTyping() {
+      let cep = $('#cep').val();
+      let httpCorreio =
+        ` https://webmaniabr.com/api/1/cep/${cep}/?app_key=Fx03yD7mTXbZ57X7LtdGjUW3l5eswMF9&app_secret=6WcBEPTDX9wzl90y7uBSaruT6tohhqWJe2I3wDYYI1s6aAi4`;
+
+      $.ajax({
+        url: httpCorreio,
+        type: 'GET'
+      }).then(function (response) { //
+        $("#bairro").val(response.bairro);
+        $("#endereco").val(response.endereco);
+        $("#cidade").val(response.cidade);
+        $("#uf").val(response.uf);
+      });
+    }
+  </script>-->
   <script src="js/vendas.js"> </script>
 </body>
 

@@ -115,18 +115,18 @@
 
         $("#Valor_vendas").val($(this).val());
         $("#imgProduto").html("")
-        $("#imgProduto").append(`  <img class="previewProd" src="https://www.imigrantesbebidas.com.br/bebida/images/products/full/1844_Refrigerante_Coca_Cola_Pet_600_ml.jpg" alt="">`)
+        $("#imgProduto").append(`  <img class="previewProd" src="" alt="">`)
         //
         //
         quantidade = parseFloat($("#Quantidade_vendas").val());
         valor = parseFloat($("#Valor_vendas :selected").text());
 
         soma = (quantidade * valor).toFixed(2);
-        if (isNaN(soma)){
+        if (isNaN(soma)) {
             soma = 0
         }
         $("#Subtotal_vendas").val(soma);
-
+        $(".sub_total").val(soma);
         var selected = $("option:selected", this);
 
         if (selected.parent()[0].label == "Lanche") {
@@ -147,10 +147,14 @@
         quantidade = $("#Quantidade_vendas").val();
         valor = parseFloat($("#Valor_vendas :selected").text());
         soma = (quantidade * valor).toFixed(2);
+        if (isNaN(soma)) {
+            soma = 0
+        }
         $("#Subtotal_vendas").val(soma);
     });
     /**----------------------------------------------------------------------------------------------------- */
     let cont = 0;
+
     $('#Add_item').click(function () {
 
         if ($('#Produto_vendas  :selected').text() == "") {
@@ -166,7 +170,15 @@
         Comanda.Valor_venda = valor;
         Comanda.Quantidade = parseInt(quantidade);
         Comanda.Desconto = parseFloat($('#Desconto_vendas').val().replace(",", "."));
-        Comanda.SubTotal = soma;
+
+
+        if (isNaN(Comanda.Desconto)) {
+            Comanda.Desconto = 0
+        } else if (Comanda.Desconto > 0) {
+            soma = soma - Comanda.Desconto
+        }
+
+        Comanda.SubTotal = soma
         Pedidos.push(Comanda);
 
         Venda.Pedidos.push(Comanda);
@@ -187,6 +199,10 @@
         $("#Obs_vendas").val("");
         $("#Total_vendas").val(Total.toFixed(2));
         $("#Quantidade_total").val(Quantidade_total);
+        $('#Desconto_vendas').val(0);
+        $('#imgProduto').html("");
+
+        atualizaValor()
     });
     /**----------------------------------------------------------------------------------------------------- */
     function salvar(item) {
@@ -194,11 +210,12 @@
         if (isNaN(item.Desconto)) {
             item.Desconto = 0
         }
+
         trHTML =
             '<tr id="tbl_tr_' + item.idComanda + '"><td>' + item.Quantidade +
             '</td><td>' + item.Descricao +
-            '</td><td>' + parseFloat(item.Desconto.toFixed(2)) +
-            '</td><td id="tbl_subtotal_' + item.idProduto + '">' + item.SubTotal +
+            '</td><td>' + parseFloat(item.Desconto).toFixed(2) +
+            '</td><td id="tbl_subtotal_' + item.idProduto + '" class="valor-calculado font-weight-bold">' + parseFloat(item.SubTotal).toFixed(2) +
             '</td><td> ' +
             '<div class="table-data-feature">' +
             /*
@@ -210,6 +227,7 @@
             '<i class="zmdi zmdi-edit"></i></p>' +
             '</div></td>' +
             '</tr>';
+
         return $('#TabelaComanda').append(trHTML);
     }
     /*
@@ -289,27 +307,68 @@
 
         //- $(`#Produto_vendas option:contains(${idProduto})`).attr('selected', true);
 
-        $("#btnAtualizar").html("")
-        $("#btnAtualizar").append(`<div class="row">
-     <div class="form-group col-6 text-center ">
-       <button type="button" class="btn btn-success  w-100">
-         <i class="fas fa-check"></i>
-         Atualizar Produto
-       </button>
-     </div>
-     <div class="form-group col-6 text-center ">
-       <button type="button" class="btn btn-danger  w-100 ">
-         <i class="fas fa-times"></i>
-      Excluir
-       </button>
-     </div>
-   </div>`)
+        $("#Add_item").attr("hidden", true);
+        $("#btnAtualizar").attr("hidden", false);
+
+        $("#btnAtualizar").html("");
+        $("#btnAtualizar").append(`
+        <div class="row">
+            <div class="form-group col-6 text-center ">
+                <button type="button" class="btn btn-success  w-100" onclick="atualizaProduto(${id})">
+                    <i class="fas fa-check"></i>
+                    Atualizar Produto
+                </button>
+            </div>
+            <div class="form-group col-6 text-center ">
+                <button type="button" class="btn btn-danger  w-100 " onclick="excluir(${id} + ', ' + 
+                ${idProduto})" >
+                    <i class="fas fa-times"></i>
+                Excluir
+                </button>
+            </div>
+        </div>`)
         //   #tbl_tr_0 > 
     }
     /**----------------------------------------------------------------------------------------------------- */
+    function atualizaProduto(id) {
+
+
+        $(`#tbl_tr_${id}>td:nth-child(1)`).text($("#Quantidade_vendas").val())
+        $(`#tbl_tr_${id}>td:nth-child(2)`).text($('#Produto_vendas  :selected').text())
+        $(`#tbl_tr_${id}>td:nth-child(3)`).text($("#Desconto_vendas").val())
+        $(`#tbl_tr_${id}>td:nth-child(4)`).text($("#Subtotal_vendas").val())
+
+        for (let i = 0; i < Pedidos.length; i++) {
+            if (i == id) {
+                Pedidos[i].Quantidade = parseInt($("#Quantidade_vendas").val());
+                Pedidos[i].SubTotal = parseFloat($("#Subtotal_vendas").val());
+                Pedidos[i].Desconto = parseFloat($("#Desconto_vendas").val());
+                Pedidos[i].Valor_venda = parseFloat($("#Valor_vendas").val());
+                Pedidos[i].Descricao = $('#Produto_vendas  :selected').text();
+                Pedidos[i].idProduto = parseInt($('#Produto_vendas  :selected').val());
+
+            }
+        }
+
+        console.log(Pedidos)
+
+
+        $('#Produto_vendas').val("");
+        $('#Quantidade_vendas').val(1);
+        $("#Valor_vendas").val("");
+        $("#Subtotal_vendas").val("");
+        $("#Obs_vendas").val("");
+        $("#Total_vendas").val(Total.toFixed(2));
+        $("#Quantidade_total").val(Quantidade_total);
+        $('#Desconto_vendas').val(0);
+        $('#imgProduto').html("");
+        $("#btnAtualizar").attr("hidden", true);
+        $("#Add_item").attr("hidden", false);
+        atualizaValor()
+    };
 
     function excluir(id, id_linha) {
-        let quantidade_Coluna = parseInt($(`#tbl_${id_linha}`).text());
+        let quantidade_Coluna = parseInt($(`#tbl_${id}`).text());
         let subtotal_Coluna = parseFloat($(`#tbl_subtotal_${id_linha}`).text());
 
         for (let i = 0; i < Pedidos.length; i++) {
@@ -328,8 +387,26 @@
                 console.log(Pedidos)
                 // console.log(Pedidos)
                 //atribui os novos valores
+
+
+                if (isNaN(Total)) {
+                    Total = 0
+                };
+                $(`#tbl_tr_${id}`).remove();
+                atualizaValor();
+                $('#Produto_vendas').val("");
+                $('#Quantidade_vendas').val(1);
+                $("#Valor_vendas").val("");
+                $("#Subtotal_vendas").val("");
+                $("#Obs_vendas").val("");
+                //   $("#Total_vendas").val(Total.toFixed(2));
                 $("#Quantidade_total").val(Quantidade_total);
-                $("#Total_vendas").val(Total.toFixed(2));
+                $('#Desconto_vendas').val(0);
+                $('#imgProduto').html("");
+
+                $("#btnAtualizar").attr("hidden", true);
+                $("#Add_item").attr("hidden", false);
+                $('#myTableRow').remove();
             }
 
         }
@@ -476,3 +553,38 @@
 
         });
     };
+
+    function atualizaValor() {
+
+        var valorCalculado = 0;
+
+        $(".valor-calculado").each(function () {
+            valorCalculado += parseFloat($(this).text());
+        });
+        console.log(valorCalculado)
+        $(".total-calculado").val(valorCalculado.toFixed(2))
+        /*
+
+        toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                }));
+        */
+    };
+
+
+    $('#FinalizarVenda').on("click", () => {
+        $('#FinalizarVendaDiv').hide()
+        $('#MostrarVendaDiv').attr("hidden", false);
+        // $('#MostrarVendaDiv').show()
+        $('#TabelaComanda2').append($("#TabelaComanda").html());
+    });
+
+    $('#cancelarVenda').on("click", () => {
+
+        $('#MostrarVendaDiv').attr("hidden", true);
+        $('#FinalizarVendaDiv').show()
+        $('#TabelaComanda').html("");
+        $('#TabelaComanda').append($("#TabelaComanda2").html());
+        // $('#MostrarVendaDiv').show()
+    });

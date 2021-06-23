@@ -60,7 +60,7 @@
       <!-- MAIN CONTENT-->
       <div class="main-content">
         <div class="section__content section__content--p30">
-          <div class="container-fluid " style="background-color: rgb(230, 230, 230); height: auto;">
+          <div class="container-fluid " style="background-color: rgb(230, 230, 230); height: 840px;">
             <div class="row">
               <div class="col-md-12">
                 <!-- DATA TABLE -->
@@ -118,7 +118,7 @@
 
                   <div class="section__content section__content--p30">
                     <div class="container-fluid">
-                      <div class="row mt-4">
+                      <div class="row mt-4" id="FinalizarVendaDiv">
                         <!--<div class="row">
                                 
                               <div class="form-group col-md-5">
@@ -298,16 +298,19 @@
                                 <div class="form-group  col-6">
                                   <label>Sub Total</label>
                                   <input class="au-input au-input--full bg-white 
-                               font-weight-bold border-input " type="text" name="sub_total" disabled
+                               font-weight-bold border-input sub_total" type="text" name="sub_total" disabled
                                     id="Subtotal_vendas" value="0.00">
                                 </div>
                               </div>
 
-                              <div class="form-group text-center" id="btnAtualizar">
+                              <div class="form-group text-center" >
                                 <!--  <label for="">Novo Item</label>-->
                                 <p class="au-btn au-btn-icon text-white bg-dark text-center" id="Add_item">
                                   <i class="zmdi zmdi-plus"></i>Adicionar Produto
                                 </p>
+                                <div id="btnAtualizar">
+
+                                </div>
                               </div>
                             </div>
 
@@ -338,7 +341,7 @@
                                   <th scope="col"> </th>
                                 </tr>
                               </thead>
-                              <tbody class="text-center text-dark " id="TabelaComanda">
+                              <tbody class="text-center text-dark  TabelaComanda" id="TabelaComanda">
 
                               </tbody>
                             </table>
@@ -350,7 +353,7 @@
 
                             <label>TOTAL PEDIDO</label>
                             <input
-                              class="text-center au-input text-white au-input--full border-input form-control bg-dark font-weight-bold"
+                              class="text-center au-input text-white au-input--full border-input form-control bg-dark  total-calculado font-weight-bold"
                               type="text" placeholder="R$0.00" id="Total_vendas" disabled value="R$0.00">
                           </div>
                           <div class="row">
@@ -370,7 +373,7 @@
                           <div class="form-group text-center">
                             <!--  <label for="">Novo Item</label>-->
                             <p class="au-btn au-btn-icon text-white bg-success text-center btn w-100"
-                              id="Concluir_vendas">
+                              id="FinalizarVenda">
                               <i class="fas fa-check"></i>FINALIZAR VENDA
                             </p>
                           </div>
@@ -384,12 +387,12 @@
                       </div>
 
 
-                      <div class="row mt-4">
+                      <div class="row mt-4" id="MostrarVendaDiv" hidden>
 
                         <div class="col-lg-6">
                           <div class="row">
                             <div class="col-12">
-                              <h3> <i class="zmdi zmdi-money"></i> Forma de Pagamento</h3>
+                              <h3>  <i class="fas fa-money"></i>Forma de Pagamento</h3>
                               <select class="form-control border-input " name="pagamento" id="Pagamento">
                                 <option value="0"></option>
                                 <option value="1">Dinheiro</option>
@@ -398,15 +401,15 @@
                               </select>
                             </div>
 
-                            <div class="mt-2  col-12">
+                            <div class="mt-4  col-12">
 
 
                               <div class="row">
                                 <div class="col-7">
-                                  <h3> Total Pago </h3>
+                                  <h3> <i class="fas fa-credit-card-blank"></i> Total Pago </h3>
                                   <div class="input-group  ">
                                     <input class="au-input au-input--full bg-white 
-                                 font-weight-bold border-input form-control w-80" type="text" name="total"
+                                 font-weight-bold border-input form-control  total-calculado text-left" type="text" name="total"
                                       id="Total_vendas" value="0.00">
                                     <div class=" input-group-append">
                                       <button class="btn btn-success">>> Confirmar</button>
@@ -416,12 +419,12 @@
                                   </div>
                                 </div>
                               </div>
-
                             </div>
 
                           </div>
-                          <div class="col-12 mt-4">
+                          <div class=" mt-4">
                             <div class="mb-5 ">
+                              <h3> <i class="fas fa-barcode"></i>Itens da Compra </h3>
                               <table class="table table-hover">
                                 <thead class="thead-dark text-center">
                                   <tr>
@@ -432,7 +435,7 @@
                                     <th scope="col"> </th>
                                   </tr>
                                 </thead>
-                                <tbody class="text-center text-dark " id="TabelaComanda">
+                                <tbody class="text-center text-dark  TabelaComanda " id="TabelaComanda2">
 
                                 </tbody>
                               </table>
@@ -440,43 +443,51 @@
                           </div>
                         </div>
                         <div class="col-lg-6">
-                          <h3><i class="fas fa-percentual"></i> Descontos</h3>
+                          <h3><i class="fas fa-percent"></i> Descontos</h3>
                           <div class="row">
 
 
                             <div class="col-lg-6 col-sm-12">
-                              <div class="input-group  ">
+                              <div class="input-group  form-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">R$</span>
+                                </div>
                                 <input class="au-input au-input--full bg-white 
                              font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
                                   value="0.00">
 
                               </div>
                             </div>
+
                             <div class="col-lg-6 col-sm-12">
 
-                              <div class="input-group  ">
+                              <div class="input-group form-group ">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text"> %</span>
+                                </div>
                                 <input class="au-input au-input--full bg-white 
                              font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
-                                  value="0.00">
+                                  value="0%">
                               </div>
                             </div>
 
                           </div>
-                          <h3> <i class="fas fa-bank mt-4"></i>Total</h3>
-                          <div class="row ">
+
+                          <div class=" ">
+                            <h3> <i class="fas fa-bank mt-4"></i>Total</h3>
                             <div class="col-12">
                               <div class="form-group input-group ">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon1"> SUBTOTAL:</span>
                                 </div>
                                 <input class="au-input au-input--full bg-white 
-                           font-weight-bold border-input form-control " type="text" name="desc" id="Desconto_vendas"
+                           font-weight-bold border-input form-control total-calculado " type="text" name="desc" id="Desconto_vendas"
                                   value="0.00">
                               </div>
                               <div class="form-group input-group  ">
                                 <div class="input-group-prepend">
                                   <span class="input-group-text" id="basic-addon2">DESCONTOS:</span>
-                                </div> 
+                                </div>
                                 <input class="au-input au-input--full bg-white 
                            font-weight-bold border-input form-control " type="text" name="desc" id="desconto_vendas"
                                   value="0.00">
@@ -486,12 +497,12 @@
                                   <span class="input-group-text" id="basic-addon3">PAGAMENTOS:</span>
                                 </div>
                                 <input class="au-input au-input--full bg-white 
-                           font-weight-bold border-input form-control " type="text" name="pagamentos" id="pagamentos_vendas"
-                                  value="0.00">
+                           font-weight-bold border-input form-control " type="text" name="pagamentos"
+                                  id="pagamentos_vendas" value="0.00">
                               </div>
                               <div class="form-group input-group  ">
                                 <div class="input-group-prepend 0 ">
-                                  <span class="input-group-text" id="basic-addon3">Troco:</span>
+                                  <span class="input-group-text" id="basic-addon3">TROCO:</span>
                                 </div>
                                 <input class="au-input au-input--full bg-white 
                            font-weight-bold border-input form-control " type="text" name="troco" id="troco_vendas"
@@ -499,18 +510,18 @@
                               </div>
                               <div class="form-group input-group  ">
                                 <div class="input-group-prepend">
-                                  <span class="input-group-text" id="basic-addon3">TOTAL a Pagar:</span>
+                                  <span class="input-group-text" id="basic-addon3">TOTAL A PAGAR:</span>
                                 </div>
                                 <input class="au-input au-input--full bg-white 
-                           font-weight-bold border-input form-control " type="text" name="totpagar" id="total_pagar_vendas"
-                                  value="0.00">
+                           font-weight-bold border-input form-control " type="text" name="totpagar"
+                                  id="total_pagar_vendas" value="0.00">
                               </div>
                             </div>
 
                           </div>
-                          <div class="offset-8">
-                            <button class="btn btn-success">>> Confirmar</button>
-                            <button class="btn btn-success">>> Confirmar</button>
+                          <div class="offset-8 offset-md-6">
+                            <button  type="button" class="btn btn-danger" id="cancelarVenda"><i class="fas fa-times"></i>Cancelar</button> 
+                            <button class="btn btn-success"> <i class="fas fa-check"></i>Finalizar</button>
                           </div>
                         </div>
                         <!--

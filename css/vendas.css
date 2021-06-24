@@ -128,3 +128,7 @@ input {
     height: auto !important;
 
 }
+
+.font-larger {
+    font-size: xx-large
+}

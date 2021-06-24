@@ -68,7 +68,7 @@
             if (a.Descricao > b.Descricao) return 1;
             return 0;
         })
-
+        console.log(response)
         Produtos = response; //popula array de produtos
         $.each(response, function (i, d) {
             vet_categoria.push(d.categoria)
@@ -87,7 +87,7 @@
             $optgroup.appendTo('#Produto_vendas'); // atribuui
             $.each(response, function (j, d) {
                 if (d.categoria == novoArray[i]) {
-                    $('<option>').val(d.idProduto).text(d.Descricao).appendTo($optgroup);
+                    $(`<option valor="${d.Valor_Venda}">`).val(d.idProduto).text(d.Descricao).appendTo($optgroup);
                 }
                 if (d.Descricao == "Ovo") {
                     $('<option>').val(d.idProduto).text(d.Descricao).appendTo(selectbox3);
@@ -160,12 +160,13 @@
         if ($('#Produto_vendas  :selected').text() == "") {
             return alert("Selecione um Item");
         }
+
         Comanda.idComanda = cont;
 
         cont++;
 
         Comanda.idProduto = parseInt(idProduto);
-        Comanda.Descricao = $('#Produto_vendas  :selected').text();
+        Comanda.Descricao = $('#Produto_vendas :selected').text();
         Comanda.Obs = $('#Obs_vendas').val();
         Comanda.Valor_venda = valor;
         Comanda.Quantidade = parseInt(quantidade);
@@ -214,7 +215,7 @@
         trHTML =
             '<tr id="tbl_tr_' + item.idComanda + '"><td>' + item.Quantidade +
             '</td><td>' + item.Descricao +
-            '</td><td>' + parseFloat(item.Desconto).toFixed(2) +
+            '</td><td class="descontos-calculado">' + item.Desconto.toFixed(2) +
             '</td><td id="tbl_subtotal_' + item.idProduto + '" class="valor-calculado font-weight-bold">' + parseFloat(item.SubTotal).toFixed(2) +
             '</td><td> ' +
             '<div class="table-data-feature">' +
@@ -239,71 +240,22 @@
     */
     /**----------------------------------------------------------------------------------------------------- */
     /**----------------------------------------------------------------------------------------------------- */
-    /*  function editar(id) {
 
-         let quantidade_Coluna = parseInt($(`#tbl_${id}`).text());
-         let aux = 0;
-         let nova_soma = 0;
-         let obs_Coluna = $(`#tbl_obs_${id}`).text();
-
-         for (let i = 0; i < Pedidos.length; i++) {
-             if (Pedidos[i].idProduto == parseInt(id)) {
-
-                 if (quantidade_Coluna < 0) {
-                     $(`#tbl_${id}`).text(Pedidos[i].Quantidade);
-                     return alert("Quantidade inválida!");
-                 }
-                 if (Pedidos[i].Quantidade < quantidade_Coluna) {
-                     //quantidade
-                     aux = parseInt(Pedidos[i].Quantidade);
-                     Quantidade_total -= aux; // tira o valor da linha do total
-                     Quantidade_total += quantidade_Coluna; // acrecenta o valor da lina no total
-                     Pedidos[i].Quantidade = quantidade_Coluna; //insere o novo valor no obj pedido
-
-                     //soma coluna
-                     nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
-
-                     //valor total
-                     Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
-                     Total += nova_soma; // acrecenta o valor da lina no total
-                     Pedidos[i].SubTotal = nova_soma;
-
-                     //atribuiçoes
-                     $("#Total_vendas").val(Total.toFixed(2));
-                     $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
-                     $("#Quantidade_total").val(Quantidade_total);
-                 } else if (Pedidos[i].Quantidade > quantidade_Coluna) {
-                     //Quantidade menor
-                     Quantidade_total -= parseInt(Pedidos[i].Quantidade);
-                     Quantidade_total += quantidade_Coluna;
-                     Pedidos[i].Quantidade = quantidade_Coluna;
-                     //soma linha menor
-                     nova_soma = Pedidos[i].Valor_venda * quantidade_Coluna;
-                     //Valor total
-                     Total -= parseFloat(Pedidos[i].SubTotal); // tira o valor da linha do total
-                     Total += nova_soma; // acrecenta o valor da lina no total
-                     Pedidos[i].SubTotal = nova_soma;
-
-                     $("#Quantidade_total").val(Quantidade_total);
-                     $("#Total_vendas").val(Total.toFixed(2));
-                     $(`#tbl_subtotal_${id}`).text(nova_soma.toFixed(2));
-                 } else if (obs_Coluna != Pedidos[i].Obs) {
-                     Pedidos[i].Obs = obs_Coluna;
-                 }
-             }
-         }
-     }*/
     function editar(id, idProduto) {
-
+        $("div.id100 select").val(idProduto);
         $("#Quantidade_vendas").val($(`#tbl_tr_${id}>td:nth-child(1)`).text());
-        $("#Subtotal_vendas").val($(`#tbl_tr_${id}>td:nth-child(4)`).text());
+        $("#Valor_vendas :selected").attr("disabled", false);
         $("#Desconto_vendas").val($(`#tbl_tr_${id}>td:nth-child(3)`).text());
+
+        let aux = ($("#Quantidade_vendas").val() * parseFloat($("#Produto_vendas :selected").attr("valor"))) - parseFloat($("#Desconto_vendas").val())
+        $("#Subtotal_vendas").val(aux.toFixed(2));
+        $("#Valor_vendas :selected").attr("disabled", true);
 
         //  $("div#Valor_vendas select").val(idProduto);
         //  $("#Produto_vendas option:selected").val(idProduto);
 
         //   $(`.id100 option[value=${idProduto}]`).attr('selected','selected');
-        $("div.id100 select").val(idProduto);
+
 
         //- $(`#Produto_vendas option:contains(${idProduto})`).attr('selected', true);
 
@@ -332,11 +284,16 @@
     /**----------------------------------------------------------------------------------------------------- */
     function atualizaProduto(id) {
 
-
-        $(`#tbl_tr_${id}>td:nth-child(1)`).text($("#Quantidade_vendas").val())
-        $(`#tbl_tr_${id}>td:nth-child(2)`).text($('#Produto_vendas  :selected').text())
-        $(`#tbl_tr_${id}>td:nth-child(3)`).text($("#Desconto_vendas").val())
-        $(`#tbl_tr_${id}>td:nth-child(4)`).text($("#Subtotal_vendas").val())
+        let desconto = $("#Desconto_vendas").val();
+        if (desconto = 0) {
+            desconto = 0
+        } else {
+            desconto = desconto.toFixed(2);
+        }
+        $(`#tbl_tr_${id}>td:nth-child(1)`).text($("#Quantidade_vendas").val());
+        $(`#tbl_tr_${id}>td:nth-child(2)`).text($('#Produto_vendas  :selected').text());
+        $(`#tbl_tr_${id}>td:nth-child(3)`).text($("#Desconto_vendas").val());
+        $(`#tbl_tr_${id}>td:nth-child(4)`).text($("#Subtotal_vendas").val());
 
         for (let i = 0; i < Pedidos.length; i++) {
             if (i == id) {
@@ -346,7 +303,6 @@
                 Pedidos[i].Valor_venda = parseFloat($("#Valor_vendas").val());
                 Pedidos[i].Descricao = $('#Produto_vendas  :selected').text();
                 Pedidos[i].idProduto = parseInt($('#Produto_vendas  :selected').val());
-
             }
         }
 
@@ -358,13 +314,14 @@
         $("#Valor_vendas").val("");
         $("#Subtotal_vendas").val("");
         $("#Obs_vendas").val("");
-        $("#Total_vendas").val(Total.toFixed(2));
+        //$("#Total_vendas").val(Total.toFixed(2));
         $("#Quantidade_total").val(Quantidade_total);
         $('#Desconto_vendas').val(0);
         $('#imgProduto').html("");
+
         $("#btnAtualizar").attr("hidden", true);
         $("#Add_item").attr("hidden", false);
-        atualizaValor()
+        atualizaValor();
     };
 
     function excluir(id, id_linha) {
@@ -413,19 +370,51 @@
     }
     /**----------------------------------------------------------------------------------------------------- */
     //Função para desconto de vendas
+
+
     $("#Desconto_vendas").change(() => {
         let valor = parseFloat($("#Desconto_vendas").val());
-        let valor_total = $("#Total_vendas").val();
-        let desconto = valor_total - valor;
+        let precoUni = $("#Produto_vendas :selected").attr("valor");
+        // let valor_total = $("#Valor_vendas :selected").text(); //$("#Total_vendas2").val().replace('R$', '').replace(",", ".");
+        let desconto = 0;
+        let quant = $("#Quantidade_vendas").val();
+
+        desconto = (precoUni * quant) - valor;
         Venda.desconto = desconto;
+
+        $("#Subtotal_vendas").val(desconto.toFixed(2));
 
         if (valor < 0 || isNaN(valor)) {
             $("#Desconto_vendas").val(0)
             return alert("Desconto Inválido")
         } else {
-            return $("#Total_vendas").val(desconto.toFixed(2))
+
+            $("#desconto_vendas").val(parseFloat($("#Desconto_vendas").val()).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }))
+
+
+            return $("#Total_vendas").val(desconto.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
         }
     })
+
+    $("#Total_vendas3").focus(() => {
+        let aux = parseFloat($("#Total_vendas").val().replace('R$', '')).toFixed(2)
+        $("#Total_vendas").val(aux)
+    });
+
+    $("#Total_vendas2").keyup(() => {
+        let aux = parseFloat($("#Total_vendas").val().replace('R$', '')).toFixed(2)
+
+        setTimeout($("#Total_vendas").val(aux.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        })), 3000)
+    });
     /**----------------------------------------------------------------------------------------------------- */
     $("#Concluir_vendas").click(() => {
         let cliente = $("#Nome_cliente option:selected").val();
@@ -481,77 +470,34 @@
 
 
     /**----------------------------------------------------------------- */
-    function buscarCliente() {
-        const get_cliente_url = "https://kd-gerenciador.herokuapp.com/cliente/listar";
-        var array_clientes = []
-        $.ajax({
-            url: get_cliente_url,
-            type: 'GET'
-        }).then(function (response) { //
+    $("#Pagamento").change(() => {
+        if ($("#Pagamento option:selected").val() == 1) {
+            $("#Total_vendas").attr("disabled", false) //bg-white 
+        }
+    })
 
-            // let array_clientes = []
-            $.each(response, function (i, item) {
-                array_clientes.push(item.Nome)
-            });
+    function finalizarValor() {
 
-            var selectbox5 = $('#Nome_cliente');
-            $.each(response, function (j, d) {
-                $('<option>')
-                    .val(d.idCliente)
-                    .text(d.Nome.toUpperCase() + ',  rua:  ' + d.Rua + ', nº' + d.Numero)
-                    .appendTo(selectbox5);
-            });
+        let troco = 0;
 
-        }).catch(function (err) {
-            console.error(err);
-        });
-    }
+        troco = parseFloat($("#Total_vendas").val().replace('R$', '').replace(',', '.')) - (parseFloat($("#subTotalFinal").val().replace('R$', '').replace(',', '.')) - parseFloat($("#desconto_vendas").val().replace('R$', '').replace(',', '.')));
 
-    buscarCliente();
+        $("#troco_vendas").val(troco.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }));
 
-    /*--------------ENVIAR CLIENTE*/
-    function enviarCliente() {
+        $("#pagamentos_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }));
 
-        var obj = {
-            nome: '',
-            email: '',
-            cep: '',
-            bairro: '',
-            cidade: '',
-            endereco: '',
-            numero: 0,
-            telefone: '',
-            celular: '',
-            uf: '',
-            complemento: '',
-            idUsuario: 0
-        };
+        $("#total_pagar_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }));
 
-        obj.nome = $("#nome").val();
-        obj.email = $("#email").val();
-        obj.cep = $("#cep").val();
-        obj.bairro = $("#bairro").val();
-        obj.cidade = $("#cidade").val();
-        obj.endereco = $("#endereco").val();
-        obj.numero = $("#numero").val();
-        obj.telefone = $("#telefone").val();
-        obj.celular = $("#celular").val();
-        obj.uf = $("#uf").val();
-        obj.complemento = $("#complemento").val();
-        obj.idUsuario = user.idUsuario;
 
-        // let post_cliente_url = "http://localhost:3000/cliente/criar";
-        let post_cliente_url = "https://kd-gerenciador.herokuapp.com/cliente/criar";
-
-        $.ajax({
-            url: post_cliente_url,
-            type: 'POST',
-            data: obj
-        }).done(function (response) { //
-            $("#novoCliente").hide();
-            buscarCliente();
-
-        });
     };
 
     function atualizaValor() {
@@ -561,11 +507,16 @@
         $(".valor-calculado").each(function () {
             valorCalculado += parseFloat($(this).text());
         });
-        console.log(valorCalculado)
-        $(".total-calculado").val(valorCalculado.toFixed(2))
+        //  console.log(valorCalculado)
+        $(".total-calculado").val(valorCalculado.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }));
+        valorCalculado = 0;
         /*
 
         toLocaleString("pt-BR", {
+
                     style: "currency",
                     currency: "BRL"
                 }));
@@ -577,7 +528,28 @@
         $('#FinalizarVendaDiv').hide()
         $('#MostrarVendaDiv').attr("hidden", false);
         // $('#MostrarVendaDiv').show()
+        let valorCalculado = 0;
+        let descontoCalculado = 0;
+        $(".valor-calculado").each(function () {
+            valorCalculado += parseFloat($(this).text());
+        });
+
+        $(".descontos-calculado").each(function () {
+            descontoCalculado += parseFloat($(this).text());
+        });
+
+        valorCalculado = valorCalculado + descontoCalculado;
+
+        $("#subTotalFinal").val(valorCalculado.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL"
+        }));
+
+        $('#TabelaComanda2').html("");
         $('#TabelaComanda2').append($("#TabelaComanda").html());
+        $('#TabelaComanda').html("");
+
+
     });
 
     $('#cancelarVenda').on("click", () => {
@@ -586,5 +558,6 @@
         $('#FinalizarVendaDiv').show()
         $('#TabelaComanda').html("");
         $('#TabelaComanda').append($("#TabelaComanda2").html());
+        $('#TabelaComanda2').html("");
         // $('#MostrarVendaDiv').show()
     });

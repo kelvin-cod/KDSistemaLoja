@@ -413,6 +413,7 @@
                                     <input class="au-input au-input--full 
                                  font-weight-bold border-input form-control  total-calculado text-left font-larger "
                                       type="text" name="total" id="Total_vendas" value="0.00" disabled>
+                                      
                                     <div class=" input-group-append">
                                       <button class="btn btn-success" type="button" onclick="finalizarValor()">>>
                                         Confirmar</button>
@@ -529,7 +530,10 @@
                           <div class="offset-8 offset-md-6">
                             <button type="button" class="btn btn-danger" id="cancelarVenda"><i
                                 class="fas fa-times"></i>Cancelar</button>
-                            <button class="btn btn-success"> <i class="fas fa-check"></i>Finalizar</button>
+                            <button type="button" class="btn btn-success" id="Concluir_vendas" disabled>
+                              <i class="fas fa-check"></i>
+                              Finalizar
+                            </button>
                           </div>
                         </div>
                         <!--

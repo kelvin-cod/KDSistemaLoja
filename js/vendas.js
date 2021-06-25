@@ -28,6 +28,7 @@
         total_venda: 0,
         cliente_venda: '',
         tipo_venda: '',
+        troco_venda: 0,
         Pedidos: []
     }
     var user = JSON.parse(sessionStorage.user);
@@ -417,15 +418,12 @@
     });
     /**----------------------------------------------------------------------------------------------------- */
     $("#Concluir_vendas").click(() => {
-        let cliente = $("#Nome_cliente option:selected").val();
-        Venda.cliente_venda = $("#Nome_cliente option:selected").text();
+        //  let cliente = $("#Nome_cliente option:selected").val();
+        //    Venda.cliente_venda = $("#Nome_cliente option:selected").text();
 
         $('#gif').hide();
 
-        if (cliente === "") {
-            Venda.idCliente = 1;
-            Venda.cliente_venda = "Cliente Padrao";
-        }
+
         if (Pedidos.length == 0) {
             return alert("Ação inválida!!");
         } else {
@@ -436,20 +434,20 @@
             let total_venda = $("#Total_vendas").val();
 
             Venda.idUsuario = user.idUsuario;
-            Venda.idCliente = $("#Nome_cliente option:selected").val();;
+            Venda.cliente_venda = "AO CONSUMIDOR";
             Venda.data_venda = $("#Data_vendas").val();
-            Venda.tipo_venda = var_name;
-            Venda.pedido_venda = numeroPedido + 1;
-            Venda.total_venda = parseFloat(total_venda);
-
+           // Venda.tipo_venda = var_name;
+         //   Venda.pedido_venda = numeroPedido + 1;
+         //   Venda.total_venda = parseFloat(total_venda);
+            console.log(Venda)
             $('#Modal').modal('show');
         }
     });
     /**----------------------------------------------------------------------------------------------------- */
     $("#modal-btn-sim").click(() => {
         $('#gif').show();
-        const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
-
+       // const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
+        const post_url = "http://localhost:3000/vendas/concluir";
         $("#confirmar").hide();
 
         console.log(Venda)
@@ -460,7 +458,7 @@
             dataType: 'json',
             complete: function () {
 
-                location.reload();
+            //    location.reload();
             }
 
         }).then(function (response) {
@@ -478,31 +476,63 @@
 
     function finalizarValor() {
 
-        let troco = 0;
+        if ($('#Pagamento  :selected').text() == "") {
+            return alert("Selecione um Pagamento");
+        }
 
+        let troco = 0;
+        let pagamento = 0;
         troco = parseFloat($("#Total_vendas").val().replace('R$', '').replace(',', '.')) - (parseFloat($("#subTotalFinal").val().replace('R$', '').replace(',', '.')) - parseFloat($("#desconto_vendas").val().replace('R$', '').replace(',', '.')));
+        Venda.troco_venda = troco;
+        Venda.tipo_venda = parseInt($('#Pagamento  :selected').val());
 
         $("#troco_vendas").val(troco.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL"
         }));
 
-        $("#pagamentos_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        }));
+        if (troco == 0) {
+            pagamento = parseFloat($("#Total_vendas").val().replace('R$', '').replace(',', '.'))
+            Venda.total_venda = pagamento;
 
-        $("#total_pagar_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL"
-        }));
+            $("#pagamentos_vendas").val(pagamento.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
 
+            $("#total_pagar_vendas").val(pagamento.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
+        } else {
+            pagamento = parseFloat($("#Total_vendas").val().replace('R$', '').replace(',', '.'))
+            Venda.total_venda = pagamento;
+            
+            $("#troco_vendas").val(troco.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
+
+            $("#pagamentos_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
+
+            $("#total_pagar_vendas").val(parseFloat($("#Total_vendas").val()).toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }));
+        }
+
+
+
+        $("#Concluir_vendas").attr("disabled", false);
 
     };
 
     function atualizaValor() {
 
-        var valorCalculado = 0;
+        let valorCalculado = 0;
 
         $(".valor-calculado").each(function () {
             valorCalculado += parseFloat($(this).text());
@@ -525,6 +555,9 @@
 
 
     $('#FinalizarVenda').on("click", () => {
+
+
+
         $('#FinalizarVendaDiv').hide()
         $('#MostrarVendaDiv').attr("hidden", false);
         // $('#MostrarVendaDiv').show()
@@ -537,7 +570,7 @@
         $(".descontos-calculado").each(function () {
             descontoCalculado += parseFloat($(this).text());
         });
-
+     
         valorCalculado = valorCalculado + descontoCalculado;
 
         $("#subTotalFinal").val(valorCalculado.toLocaleString("pt-BR", {

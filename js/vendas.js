@@ -446,8 +446,8 @@
     /**----------------------------------------------------------------------------------------------------- */
     $("#modal-btn-sim").click(() => {
         $('#gif').show();
-       // const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
-        const post_url = "http://localhost:3000/vendas/concluir";
+        const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
+       // const post_url = "http://localhost:3000/vendas/concluir";
         $("#confirmar").hide();
 
         console.log(Venda)
@@ -458,7 +458,7 @@
             dataType: 'json',
             complete: function () {
 
-            //    location.reload();
+               location.reload();
             }
 
         }).then(function (response) {

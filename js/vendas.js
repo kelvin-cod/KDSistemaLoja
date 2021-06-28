@@ -32,6 +32,25 @@
         Pedidos: []
     }
     var user = JSON.parse(sessionStorage.user);
+    async function getDate() {
+        hoje = await new Date();
+        yr = hoje.getFullYear();
+        mt = hoje.getMonth() + 1;
+        dy = hoje.getDate();
+    
+        if (dy < 10) {
+            dy = "0" + dy
+        }
+        if (mt < 10) {
+            mt = "0" + mt
+        }
+        return dy + "-" + mt + "-" + yr;
+    }
+    getDate().then(resp => {
+ 
+        $("#Data").text(resp);
+    });
+    
     /************************************************************************************************************************* */
     Array.prototype.duplicates = function () {
         return this.filter(function (x, y, k) {

@@ -51,7 +51,7 @@ var vet_ativo_categoria = [];
 var vet_inativo_categoria = [];
 
 $.ajax({
-    url: get_url_categoria ,
+    url: get_url_categoria,
     type: 'GET'
 }).done(function (response) { //
 
@@ -173,12 +173,12 @@ $.ajax({
     $('#tabelaFornecedor').append(tblFornecedor);
     esconderInativos("tabelaFornecedor", "hide", 5);
 });
-        /*Organiza o Array */
-        response = response.sort(function compare(a, b) {
-            if (a.idProduto < b.idProduto) return -1;
-            if (a.idProduto > b.idProduto) return 1;
-            return 0;
-        })
+/*Organiza o Array 
+response = response.sort(function compare(a, b) {
+    if (a.idProduto < b.idProduto) return -1;
+    if (a.idProduto > b.idProduto) return 1;
+    return 0;
+})*/
 /* funçao traz combo*/
 $.ajax({
     url: 'https://kd-gerenciador.herokuapp.com/produtos/listar',
@@ -242,6 +242,7 @@ function editarProduto(_id) {
             produto = (item);
         }
     });
+
     $("#idProduto").val(produto.idProduto);
     $("#Descricao").val(produto.Descricao);
     $("#Valor_compra").val(parseFloat(produto.Valor_Compra).toFixed(2));
@@ -362,6 +363,7 @@ function atualizarProduto() {
     obj.Validade = $("#Validade").val();
     obj.Unidade_Medida = $("#Unidade_medida").val();
     obj.idUsuario = user.idUsuario;
+    obj.codProduto = $("#codProduto").val();
     obj.idFornecedor = parseInt($("#fornecedor").val());
     obj.idCategoria = parseInt($("#categoria").val());
 
@@ -413,6 +415,7 @@ function enviarProduto() {
         Quantidade: '',
         Tipo: '',
         idUsuario: '',
+        codProduto: 0,
         idFornecedor: '',
         idCategoria: ''
     }
@@ -424,6 +427,7 @@ function enviarProduto() {
     obj.Tipo = $("#Tipo").val();
     obj.Unidade_Medida = $("#Unidade_medida").val();
     obj.idUsuario = user.idUsuario;
+    obj.codProduto = $("#codProduto").val();
     obj.idFornecedor = parseInt($("#fornecedor").val());
     obj.idCategoria = parseInt($("#categoria").val());
 
@@ -482,8 +486,8 @@ $("#excluir_Categoria").click(() => {
 
 function excluirCategoria() {
 
-  let delete_url_categoria = "https://kd-gerenciador.herokuapp.com/categorias/excluir/";
-   // let delete_url_categoria="http://localhost:3000/categorias/excluir/"
+    let delete_url_categoria = "https://kd-gerenciador.herokuapp.com/categorias/excluir/";
+    // let delete_url_categoria="http://localhost:3000/categorias/excluir/"
     $("gif").show()
     $.ajax({
         url: `${delete_url_categoria + idExcluirCategoria}`,
@@ -494,7 +498,7 @@ function excluirCategoria() {
         document.location.reload();
 
     }).catch(function (err) {
-       console.log(err.responseText)
+        console.log(err.responseText)
     });
 } //função para excluir categoria
 

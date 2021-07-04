@@ -60,7 +60,7 @@
     let mes = now.getMonth() + 1 // arrumar bug de mes
 
     $("#Data_vendas").val(now.getDate() + "/" + mes + "/" + now.getFullYear());
-
+/*
     $.ajax({
         url: 'https://kd-gerenciador.herokuapp.com/vendas/ultimo',
         // url: 'http://localhost:3000/produtos/listar',
@@ -72,7 +72,7 @@
             $("#Numero_pedido").val(aux);
         }
     });
-
+*/
     $.ajax({
         url: 'https://kd-gerenciador.herokuapp.com/produtos/listar',
         type: 'GET',
@@ -326,7 +326,7 @@
             }
         }
 
-        console.log(Pedidos)
+       // console.log(Pedidos)
 
 
         $('#Produto_vendas').val("");

@@ -432,7 +432,7 @@ function enviarProduto() {
     obj.idCategoria = parseInt($("#categoria").val());
 
     // var post_url = "http://localhost:3000/produtos/criar";
-    var post_url = "https://kd-gerenciador.herokuapp.com/produtos/criar";
+    let post_url = "https://kd-gerenciador.herokuapp.com/produtos/criar";
     $.ajax({
         url: post_url,
         type: 'POST',

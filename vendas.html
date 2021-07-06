@@ -414,7 +414,7 @@
                                     <input class="au-input au-input--full 
                                  font-weight-bold border-input form-control  total-calculado text-left font-larger "
                                       type="text" name="total" id="Total_vendas" value="0.00" disabled>
-                                      
+
                                     <div class=" input-group-append">
                                       <button class="btn btn-success" type="button" onclick="finalizarValor()">>>
                                         Confirmar</button>
@@ -663,48 +663,8 @@
 
   <script src="./js/bootstable.js"></script>
   <script type="text/javascript">
-    $('#Tabela_vendas').SetEditable({
-
-      columnsEd: "2,4"
-
-    });
     $("#logo").show()
   </script>
-  <!--
-  <script src="js/utils/jquery.mask.js"></script>
-  <script src="js/utils/jquery.correios.min.js"></script>
-  <script src="js/utils/jquery.quick.search.js"></script>
-  <script>
-    $("#celular").mask("(00) 00000-0000");
-    $("#telefone").mask("(00) 0000-0000");
-    $("#modalCelular").mask("(00) 0000-0000");
-    /*função cep correios*/
-    $("#cep").mask("00000-000");
-    var typingTimer; //timer identifier
-    var doneTypingInterval = 1000; //time in ms, 1 second for example
-    $("#cep").keydown(function () {
-      clearTimeout(typingTimer);
-      if ($('#cep').val) {
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-      }
-    })
-
-    function doneTyping() {
-      let cep = $('#cep').val();
-      let httpCorreio =
-        ` https://webmaniabr.com/api/1/cep/${cep}/?app_key=Fx03yD7mTXbZ57X7LtdGjUW3l5eswMF9&app_secret=6WcBEPTDX9wzl90y7uBSaruT6tohhqWJe2I3wDYYI1s6aAi4`;
-
-      $.ajax({
-        url: httpCorreio,
-        type: 'GET'
-      }).then(function (response) { //
-        $("#bairro").val(response.bairro);
-        $("#endereco").val(response.endereco);
-        $("#cidade").val(response.cidade);
-        $("#uf").val(response.uf);
-      });
-    }
-  </script>-->
   <script src="js/vendas.js"> </script>
 </body>
 

@@ -619,7 +619,7 @@ function enviarFornecedor() {
     objFornecedor.telefone = $("#telefone").val();
     objFornecedor.email = $("#email").val();
     objFornecedor.fantasia = $("#fantasia").val();
-    objFornecedor.EstatusFornecedor = $("#statusFornecedor :selected").val()
+    objFornecedor.EstatusFornecedor = $("#statusFornecedor :selected").val();
     objFornecedor.idUsuario = user.idUsuario;
     //console.log(objFornecedor)
     $("#gif").show();

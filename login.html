@@ -180,7 +180,7 @@
             $.ajax({
                     url: post_url,
                     type: 'POST',
-                    data: obj,
+                    data: obj
 
                 }).done(function (response) {
 
@@ -203,7 +203,7 @@
 
             var remember = $.cookie('remember');
             if (remember == 'true') {
-                $('#remember' ).prop('checked', true);
+                $('#remember').prop('checked', true);
                 var email = $.cookie('email');
                 var password = $.cookie('password');
                 // autofill the fields
@@ -214,8 +214,8 @@
 
             $("#login").click(function () {
                 if ($('#remember').is(':checked')) {
-                  
-            
+
+
                     var email = $('#email').val();
                     var password = $('#password').val();
 

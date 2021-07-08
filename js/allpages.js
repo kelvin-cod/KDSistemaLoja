@@ -18,7 +18,7 @@ async function isloggedIn() {
         if (user.Foto == null) {
             user.Foto = preview;
         }
-    
+
         let imagem = '<img class="img-user" src=' + user.Foto + ' alt="user Photo" />'
 
         $("#usuario_nome").append(user.Nome);
@@ -28,6 +28,7 @@ async function isloggedIn() {
         $(".usuario_foto").append(imagem);
     }
 
+    
     if (localStorage.venda == null) {
         fechado = '<div class="bg-danger"><p class="text-center text-white p-1">Balcão Fechado</p></div>';
         $("#balcaoVendas").append(fechado)

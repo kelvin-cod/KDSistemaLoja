@@ -88,7 +88,7 @@
             if (a.Descricao > b.Descricao) return 1;
             return 0;
         })
-        console.log(response)
+      //  console.log(response)
         Produtos = response; //popula array de produtos
         $.each(response, function (i, d) {
             vet_categoria.push(d.categoria)

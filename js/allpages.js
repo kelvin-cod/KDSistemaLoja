@@ -3,10 +3,10 @@ var novaURL = "login.html";
 async function isloggedIn() {
     var preview = await "https://i.ibb.co/sPxMfwZ/user-white.jpg";
     var user = {};
-    let aberto, fechado;
 
     try {
         user = await JSON.parse(sessionStorage.getItem("user"));
+        user.Foto = preview;
     } catch (error) {
         console.log(error)
     }
@@ -15,27 +15,21 @@ async function isloggedIn() {
         $(window.document.location).attr('href', novaURL);
     } else {
 
-        if (user.Foto == null) {
-            user.Foto = preview;
-        }
-
-        let imagem = '<img class="img-user" src=' + user.Foto + ' alt="user Photo" />'
-
         $("#usuario_nome").append(user.Nome);
         $(".usuario_nome").append(user.Nome);
 
         $(".usuario_email").append(user.Email);
-        $(".usuario_foto").append(imagem);
-    }
+        $(".usuario_foto").append(`<img class="img-user" src='https://i.ibb.co/sPxMfwZ/user-white.jpg' alt="user Photo" />`);
+      
+        let rota = ($(window.document.location).attr('href')).split("/").pop();
 
-    
-    if (localStorage.venda == null) {
-        fechado = '<div class="bg-danger"><p class="text-center text-white p-1">Balcão Fechado</p></div>';
-        $("#balcaoVendas").append(fechado)
-
-    } else {
-        aberto = '<div class="bg-success"><p class="text-center text-white p-1">Balcão Aberto</p></div>';
-        $("#balcaoVendas").append(aberto)
+        if (user.tipo === 2) {
+            if (rota == "vendas") {
+                //    console.log(rota)
+            } else {
+                $(window.document.location).attr('href', "vendas.html");
+            }
+        }
     }
 
 };

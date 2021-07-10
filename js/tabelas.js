@@ -1,6 +1,5 @@
 var user = JSON.parse(sessionStorage.user); // pega user do session
 
-
 $.ajax({
     url: `https://kd-gerenciador.herokuapp.com/vendas/listar/${user.idEmpresa}`,
     // url: 'http://localhost:3000/produtos/listar',
@@ -12,13 +11,13 @@ $.ajax({
         objCategoria = {};
         let quantidade_total;
         let vet = []
-        console.log(response)
+      //  console.log(response)
 
         $.each(response, function (i, item) {
             if (item.idPedido == item.pedido) {
                 vet.push(item)
             }
-            console.log(vet)
+          //  console.log(vet)
         });
         $.each(response, function (i, item) {
             let data = new Date(item.data_venda);

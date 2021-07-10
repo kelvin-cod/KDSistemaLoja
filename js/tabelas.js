@@ -24,7 +24,6 @@ $.ajax({
             let data = new Date(item.data_venda);
             tbHTML +=
                 '<tr><td>' + item.idPedido +
-                '</td><td>' + item.Tipo_Pedido +
                 '</td><td>' + item.Descricao +
                 '</td><td>' + parseFloat(item.Desconto).toFixed(2) +
                 '</td><td>' + item.Quantidade_item +

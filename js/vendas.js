@@ -78,7 +78,7 @@
         });
     */
     $.ajax({
-        url: 'https://kd-gerenciador.herokuapp.com/produtos/listar',
+        url: `https://kd-gerenciador.herokuapp.com/produtos/listar/${user.idEmpresa}`,
         type: 'GET',
         dataType: 'json', // added data type
     }).done(function (response) { //
@@ -482,11 +482,13 @@
             dataType: 'json'
 
         }).done(function (response) {
-            location.reload();
-        }).fail(function (response) {
-            alert(response)
 
-        });
+            if (response.status != 200) {
+                alert(response.statusText)
+            } else {
+                location.reload();
+            }
+        })
     });
 
 

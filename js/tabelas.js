@@ -30,10 +30,7 @@ $.ajax({
                 '</td><td>' + item.Quantidade_item +
                 '</td><td>' + item.Valor_Total +
                 '</td><td>' + data.toLocaleString() +
-
-                '</td><td>' + item.Cliente
-
-            '</td></tr>';
+                '</td></tr>';
         });
         $('#tabelaPedido').append(tbHTML);
 

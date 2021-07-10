@@ -469,26 +469,25 @@
     });
     /**----------------------------------------------------------------------------------------------------- */
     $("#modal-btn-sim").click(() => {
-        $('#gif').show();
+     
         const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
         // const post_url = "http://localhost:3000/vendas/concluir";
+        $('#gif').show();
         $("#confirmar").hide();
-
 
         $.ajax({
             url: post_url,
             type: 'POST',
-            data: Venda,
-            dataType: 'json'
+            data: Venda
 
         }).then(function (response) {
-            location.reload();
-
+          location.reload();
+/*
             if (response.status != 200) {
                 alert(response.statusText)
             } else {
 
-            }
+            }*/
         })
     });
 

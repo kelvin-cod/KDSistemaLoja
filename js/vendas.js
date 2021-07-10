@@ -365,7 +365,7 @@
                 // remove do vetor o item excluido
                 Pedidos.splice(i, 1);
                 Venda.Pedidos.splice(i, 1);
-                console.log(Pedidos)
+                // console.log(Pedidos)
                 // console.log(Pedidos)
                 //atribui os novos valores
 
@@ -482,11 +482,12 @@
             dataType: 'json'
 
         }).done(function (response) {
-
+            location.reload();
+            
             if (response.status != 200) {
                 alert(response.statusText)
             } else {
-                location.reload();
+
             }
         })
     });

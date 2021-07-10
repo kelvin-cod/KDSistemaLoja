@@ -1,7 +1,7 @@
 var idProduto;
 var combofornecedorNovo;
 var combocategoriaNovo;
-var user = JSON.parse(sessionStorage.user); // pega user do session
+let user = JSON.parse(sessionStorage.user); // pega user do session
 var objProdutos = {};
 var objCategoria = {};
 let idExcluirFornecedor;
@@ -45,8 +45,8 @@ function fazerRequisicaoUM(id) {
 //var get_url = 'http://localhost:3000/categorias/listar';
 //var get_url_fornecedor = 'http://localhost:3000/produtos/fornecedores';
 //var get_url_fornecedor = 'https://kd-gerenciador.herokuapp.com/produtos/fornecedor';
-var get_url_fornecedor = 'https://kd-gerenciador.herokuapp.com/fornecedores/listar';
-let get_url_categoria = 'https://kd-gerenciador.herokuapp.com/categorias/listar';
+let get_url_fornecedor = `https://kd-gerenciador.herokuapp.com/fornecedores/listar/${user.idEmpresa}`;
+let get_url_categoria = `https://kd-gerenciador.herokuapp.com/categorias/listar/${user.idEmpresa}`;
 var vet_ativo_categoria = [];
 var vet_inativo_categoria = [];
 
@@ -123,7 +123,8 @@ function poupulaTabelaCategoria(vetor) {
 
 var selectbox4 = $('#fornecedor');
 var selectbox5 = $('#fornecedorum');
-var objFornecedor
+var objFornecedor;
+
 $.ajax({
     url: get_url_fornecedor,
     type: 'GET',
@@ -181,7 +182,7 @@ response = response.sort(function compare(a, b) {
 })*/
 /* funçao traz combo*/
 $.ajax({
-    url: 'https://kd-gerenciador.herokuapp.com/produtos/listar',
+    url: `https://kd-gerenciador.herokuapp.com/produtos/listar/${user.idEmpresa}`,
     // url: 'http://localhost:3000/produtos/listar',
     type: 'GET',
     dataType: 'json', // added data type
@@ -417,7 +418,8 @@ function enviarProduto() {
         idUsuario: '',
         codProduto: 0,
         idFornecedor: '',
-        idCategoria: ''
+        idCategoria: '',
+        idEmpresa: 0
     }
 
     obj.Descricao = $("#Descricao").val();
@@ -427,6 +429,7 @@ function enviarProduto() {
     obj.Tipo = $("#Tipo").val();
     obj.Unidade_Medida = $("#Unidade_medida").val();
     obj.idUsuario = user.idUsuario;
+    obj.idEmpresa = user.idEmpresa;
     obj.codProduto = $("#codProduto").val();
     obj.idFornecedor = parseInt($("#fornecedor").val());
     obj.idCategoria = parseInt($("#categoria").val());
@@ -522,12 +525,14 @@ function enviarCategoria() {
     var obj = {
         Descricao: '',
         Estatus: '',
-        idUsuario: 0
+        idUsuario: 0,
+        idEmpresa: 0
     } //cria o objeto
 
     obj.Descricao = $("#DescricaoCategoria").val();
     obj.Estatus = $("#Estatus").val();
     obj.idUsuario = user.idUsuario;
+    obj.idEmpresa = user.idEmpresa;
 
     // var post_url = "http://localhost:3000/categorias/criar";
     var post_url = "https://kd-gerenciador.herokuapp.com/categorias/criar";
@@ -610,7 +615,8 @@ function enviarFornecedor() {
         email: "",
         EstatusFornecedor: "",
         representante: "",
-        idUsuario: 0
+        idUsuario: 0,
+        idEmpresa: 0
     }
 
     objFornecedor.razaoSocial = $("#razaoSocial").val();
@@ -621,6 +627,8 @@ function enviarFornecedor() {
     objFornecedor.fantasia = $("#fantasia").val();
     objFornecedor.EstatusFornecedor = $("#statusFornecedor :selected").val();
     objFornecedor.idUsuario = user.idUsuario;
+    objFornecedor.idEmpresa = user.idEmpresa;
+
     //console.log(objFornecedor)
     $("#gif").show();
     $.ajax({

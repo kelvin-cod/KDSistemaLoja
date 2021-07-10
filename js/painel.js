@@ -1,4 +1,7 @@
-const get_listar_url = "https://kd-gerenciador.herokuapp.com/painel/listar";
+var user = JSON.parse(sessionStorage.user); // pega user do session
+
+
+const get_listar_url = `https://kd-gerenciador.herokuapp.com/painel/listar/${user.idEmpresa}`;
 
 $.ajax({
   url: get_listar_url,
@@ -22,7 +25,7 @@ $.ajax({
 });
 //------------------------------------------------------------------------------------------------------
 //produtos
-const get_produtos_url = "https://kd-gerenciador.herokuapp.com/painel/produtos";
+const get_produtos_url = `https://kd-gerenciador.herokuapp.com/painel/produtos/${user.idEmpresa}`;
 
 $.ajax({
   url: get_produtos_url,
@@ -49,7 +52,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //tipos de vendas
-const get_vendas_url = "https://kd-gerenciador.herokuapp.com/painel/vendas";
+const get_vendas_url = `https://kd-gerenciador.herokuapp.com/painel/vendas/${user.idEmpresa}`;
 
 $.ajax({
   url: get_vendas_url,
@@ -73,7 +76,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //total de vendas
-const get_vendas_total_url = "https://kd-gerenciador.herokuapp.com/painel/vendas/total";
+const get_vendas_total_url = `https://kd-gerenciador.herokuapp.com/painel/vendas/total/${user.idEmpresa}`;
 
 $.ajax({
   url: get_vendas_total_url,
@@ -99,7 +102,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //total de vendas
-const get_estoque_pago_url = "https://kd-gerenciador.herokuapp.com/painel/estoque";
+const get_estoque_pago_url = `https://kd-gerenciador.herokuapp.com/painel/estoque/${user.idEmpresa}`;
 
 $.ajax({
   url: get_estoque_pago_url,
@@ -125,7 +128,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //total a receber
-const get_estoque_receber_url = "https://kd-gerenciador.herokuapp.com/painel/estoque/receber";
+const get_estoque_receber_url = `https://kd-gerenciador.herokuapp.com/painel/estoque/receber/${user.idEmpresa}`;
 
 $.ajax({
   url: get_estoque_receber_url,
@@ -152,7 +155,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //estoque
-const get_estoque_listar_url = "https://kd-gerenciador.herokuapp.com/painel/estoque/listar";
+const get_estoque_listar_url = `https://kd-gerenciador.herokuapp.com/painel/estoque/listar/${user.idEmpresa}`;
 
 $.ajax({
   url: get_estoque_listar_url,
@@ -178,7 +181,7 @@ $.ajax({
 
 ///------------------------------------------------------------------------------------------------
 //lucro
-const get_estoque_lucro_url = "https://kd-gerenciador.herokuapp.com/painel/estoque/lucro";
+const get_estoque_lucro_url = `https://kd-gerenciador.herokuapp.com/painel/estoque/lucro/${user.idEmpresa}`;
 
 $.ajax({
   url: get_estoque_lucro_url,
@@ -193,7 +196,7 @@ $.ajax({
     vetorDados.push(parseFloat(d.Lucro.toFixed(2)));
     vetorBarra.push(d.Categoria);
   });
-// somarTotalLucro = somarTotalLucro + 127
+  // somarTotalLucro = somarTotalLucro + 127
   $('#painel_estoque_lucro').text(somarTotalLucro.toFixed(2));
 
   graficoLinhas(vetorDados, vetorBarra, "widgetChart8", 'Produtos');

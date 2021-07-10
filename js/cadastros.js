@@ -3,7 +3,7 @@ let tblCaixa;
 let caixas;
 
 $.ajax({
-    url: `https://kd-gerenciador.herokuapp.com/user/listar/caixa/${user.idUsuario}`,
+    url: `https://kd-gerenciador.herokuapp.com/user/listar/caixa/${user.idEmpresa}`,
     // url: `http://localhost:3000/user/listar/caixa/${user.idUsuario}`,
     type: 'GET'
 }).done(function (response) {
@@ -38,6 +38,7 @@ $.ajax({
 $("#enviar").on("click", () => {
     let obj = {
         idUsuario: 0,
+        idEmpresa: 0,
         email: "",
         password: "",
         nome: "",
@@ -46,6 +47,7 @@ $("#enviar").on("click", () => {
     let post_url = "https://kd-gerenciador.herokuapp.com/user/create/caixa";
     // let post_url = "http://localhost:3000/user/create/caixa";
     obj.idUsuario = user.idUsuario;
+    obj.idEmpresa = user.idEmpresa;
     obj.email = $("#email").val();
     obj.password = $("#password").val();
     obj.nome = $("#nome").val();

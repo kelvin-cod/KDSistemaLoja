@@ -29,6 +29,7 @@
         cliente_venda: '',
         tipo_venda: '',
         troco_venda: 0,
+        idEmpresa: 0,
         Pedidos: []
     }
     var user = JSON.parse(sessionStorage.user);
@@ -37,7 +38,7 @@
         yr = hoje.getFullYear();
         mt = hoje.getMonth() + 1;
         dy = hoje.getDate();
-    
+
         if (dy < 10) {
             dy = "0" + dy
         }
@@ -47,10 +48,13 @@
         return dy + "-" + mt + "-" + yr;
     }
     getDate().then(resp => {
- 
+
         $("#Data").text(resp);
     });
-    
+    var gif = '<img width="100" src="https://pa1.narvii.com/6890/f52432aea86cab93504a3e469767a0fdc6caea3cr1-320-240_hq.gif" >';
+
+    $("#gif").append(gif);
+    $("#gif").hide();
     /************************************************************************************************************************* */
     Array.prototype.duplicates = function () {
         return this.filter(function (x, y, k) {
@@ -60,19 +64,19 @@
     let mes = now.getMonth() + 1 // arrumar bug de mes
 
     $("#Data_vendas").val(now.getDate() + "/" + mes + "/" + now.getFullYear());
-/*
-    $.ajax({
-        url: 'https://kd-gerenciador.herokuapp.com/vendas/ultimo',
-        // url: 'http://localhost:3000/produtos/listar',
-        type: 'GET',
-        dataType: 'json', // added data type
+    /*
+        $.ajax({
+            url: 'https://kd-gerenciador.herokuapp.com/vendas/ultimo',
+            // url: 'http://localhost:3000/produtos/listar',
+            type: 'GET',
+            dataType: 'json', // added data type
 
-        success: function (response) {
-            let aux = parseInt(response[0].ultimo) + 1;
-            $("#Numero_pedido").val(aux);
-        }
-    });
-*/
+            success: function (response) {
+                let aux = parseInt(response[0].ultimo) + 1;
+                $("#Numero_pedido").val(aux);
+            }
+        });
+    */
     $.ajax({
         url: 'https://kd-gerenciador.herokuapp.com/produtos/listar',
         type: 'GET',
@@ -88,7 +92,7 @@
             if (a.Descricao > b.Descricao) return 1;
             return 0;
         })
-      //  console.log(response)
+        //  console.log(response)
         Produtos = response; //popula array de produtos
         $.each(response, function (i, d) {
             vet_categoria.push(d.categoria)
@@ -326,7 +330,7 @@
             }
         }
 
-       // console.log(Pedidos)
+        // console.log(Pedidos)
 
 
         $('#Produto_vendas').val("");
@@ -453,12 +457,13 @@
             let total_venda = $("#Total_vendas").val();
 
             Venda.idUsuario = user.idUsuario;
+            Venda.idEmpresa = user.idEmpresa;
             Venda.cliente_venda = "AO CONSUMIDOR";
             Venda.data_venda = $("#Data_vendas").val();
-           // Venda.tipo_venda = var_name;
-         //   Venda.pedido_venda = numeroPedido + 1;
-         //   Venda.total_venda = parseFloat(total_venda);
-            console.log(Venda)
+            // Venda.tipo_venda = var_name;
+            //   Venda.pedido_venda = numeroPedido + 1;
+            //   Venda.total_venda = parseFloat(total_venda);
+            // console.log(Venda)
             $('#Modal').modal('show');
         }
     });
@@ -466,23 +471,22 @@
     $("#modal-btn-sim").click(() => {
         $('#gif').show();
         const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
-       // const post_url = "http://localhost:3000/vendas/concluir";
+        // const post_url = "http://localhost:3000/vendas/concluir";
         $("#confirmar").hide();
 
-        console.log(Venda)
+
         $.ajax({
             url: post_url,
             type: 'POST',
             data: Venda,
-            dataType: 'json',
-            complete: function () {
+            dataType: 'json'
 
-               location.reload();
-            }
+        }).done(function (response) {
+            location.reload();
+        }).fail(function (response) {
+            alert(response)
 
-        }).then(function (response) {
-            console.log(response)
-        })
+        });
     });
 
 
@@ -526,7 +530,7 @@
         } else {
             pagamento = parseFloat($("#Total_vendas").val().replace('R$', '').replace(',', '.'))
             Venda.total_venda = pagamento;
-            
+
             $("#troco_vendas").val(troco.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL"
@@ -589,7 +593,7 @@
         $(".descontos-calculado").each(function () {
             descontoCalculado += parseFloat($(this).text());
         });
-     
+
         valorCalculado = valorCalculado + descontoCalculado;
 
         $("#subTotalFinal").val(valorCalculado.toLocaleString("pt-BR", {

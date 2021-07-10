@@ -35,8 +35,7 @@ $("#submit").click(function () {
         nome: '',
         email: '',
         password: '',
-        email_recuperacao: '',
-        foto: ''
+        email_recuperacao: ''
     };
 
     let aux = $("#foto")[0].files[0];;
@@ -45,7 +44,6 @@ $("#submit").click(function () {
     obj.email = $("#email").val();
     obj.password = $("#password").val();
     obj.email_recuperacao = $("#email_recuperacao").val();
-    obj.foto = result;
 
     // var post_url = "http://localhost:3000/user/upload/image";
 

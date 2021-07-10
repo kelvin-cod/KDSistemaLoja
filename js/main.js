@@ -1,7 +1,3 @@
-(function ($) {
-
-
-})(jQuery);
 
 $(document).ready(function () {
   $.get("menu.html", function (data) {

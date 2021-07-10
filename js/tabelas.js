@@ -1,5 +1,8 @@
+var user = JSON.parse(sessionStorage.user); // pega user do session
+
+
 $.ajax({
-    url: 'https://kd-gerenciador.herokuapp.com/vendas/listar',
+    url: `https://kd-gerenciador.herokuapp.com/vendas/listar/${user.idEmpresa}`,
     // url: 'http://localhost:3000/produtos/listar',
     type: 'GET',
     dataType: 'json', // added data type

@@ -4,31 +4,6 @@ $("#gif").append(gif);
 $("#gif").hide();
 /*=======================================================================================*/
 
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#image').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-    }
-};
-var result;
-
-function encodeImgtoBase64(element) {
-    readURL(element);
-
-    var img = element.files[0];
-
-    var reader = new FileReader();
-
-    reader.onloadend = function () {
-        result = reader.result;
-        // console.log(result)
-    }
-    reader.readAsDataURL(img);
-};
 
 $("#submit").click(function () {
     var obj = {
@@ -37,8 +12,6 @@ $("#submit").click(function () {
         password: '',
         email_recuperacao: ''
     };
-
-    let aux = $("#foto")[0].files[0];;
 
     obj.nome = $("#nome").val();
     obj.email = $("#email").val();
@@ -65,9 +38,3 @@ $("#submit").click(function () {
 
     });;
 });
-
-$("#foto").change(() => {
-
-    readURL(this)
-
-})

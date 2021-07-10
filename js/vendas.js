@@ -481,9 +481,9 @@
             data: Venda,
             dataType: 'json'
 
-        }).done(function (response) {
+        }).then(function (response) {
             location.reload();
-            
+
             if (response.status != 200) {
                 alert(response.statusText)
             } else {

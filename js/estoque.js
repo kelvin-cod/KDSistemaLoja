@@ -131,8 +131,8 @@ $.ajax({
 }).done(function (response) { //
 
     let tblFornecedor;
-    selectbox4.find('option').remove();
-    selectbox5.find('option').remove();
+    //selectbox4.find('option').remove();
+    //selectbox5.find('option').remove();
     $.each(response, function (i, d) {
 
 

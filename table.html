@@ -69,19 +69,24 @@
               </div>
               <div class="col-md-12 ">
                 <div class="table-responsive table-responsive-data2" style="border: 1px solid rgb(0, 0, 0);">
-                  <h3 class="text-center mt-4">Tabela Pedidos</h3>
-                  <div class="input-group col-12 col-md-4">
-                    <input class="form-control" type="date" name="" aria-describedby="busca data">
-                    <div class="input-group-append">
-                      <button></button>
-                      <span class="input-group-text bg-success text-white btn" id="busca data">Filtrar data</span>
+                  <h3 class="text-center mt-4 mb-2">Tabela Pedidos</h3>
+                  <div>
+                    <div class="input-group col-lg-5 col-md-5">
+                      <input class="form-control" type="date" name="" aria-describedby="busca data" id="dataFiltro">
+                      <div class="input-group-append">
+                        <button type="button" class="text-white btn btn-success" id="buscaData">
+                          Filtrar data
+                        </button>
+                      </div>
+
                     </div>
+                    <small class="ml-4">*dois clique para limpar filtro</small>
                   </div>
 
-                  <table class="table table-data2   mt-4 table-bordered  bg-secondary table-hover">
-                    <thead class="thead-dark ">
+                  <table class="table table-data2  mt-4  bg-secondary table-hover"id="tabelaPedido">
+                    <thead class="thead-dark text-center ">
                       <tr>
-                        <th class="text-white" scope="col">#</th>
+
                         <th class="text-white" scope="col">Itens Pedido</th>
                         <th class="text-white" scope="col">Desconto</th>
                         <th class="text-white" scope="col">Q. Total</th>
@@ -90,8 +95,16 @@
                       </tr>
                     </thead>
                     <!--TABELA PEDIDO-->
-                    <tbody id="tabelaPedido"></tbody>
-
+                    <tbody  class="text-center"></tbody>
+                    <tfoot>
+                      <tr class="text-center bg-white text-dark" >
+                        <td></td>
+                        <td>Descontos: <span class="font-weight-bold" id="dTotal"></span></td>
+                        <td>Quant. Produtos: <span id="qTotal" class="font-weight-bold"></span></td>
+                        <td>Total: <span id="vTotal" class="font-weight-bold"></span></td>
+                        <td></td>
+                      </tr>
+                    </tfoot>
                   </table>
                 </div>
 

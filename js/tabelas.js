@@ -31,6 +31,7 @@ function getVendas() {
                     '</td><td>' + data.toLocaleDateString() +
                     '</td></tr>';
             });
+            
             $('#tabelaPedido>tbody').html("");
             $('#tabelaPedido>tbody').append(tbHTML);
 

@@ -249,6 +249,7 @@ function editarProduto(_id) {
     $("#Valor_compra").val(parseFloat(produto.Valor_Compra).toFixed(2));
     $("#Valor_venda").val(parseFloat(produto.Valor_Venda).toFixed(2));
     $("#Quantidade").val(parseInt(produto.Estoque));
+    $("#codProduto").val(parseInt(produto.codProduto));
     $("#Tipo").val(produto.Tipo);
     $('#fornecedor option[value= ' + produto.idFornecedor + ']').attr('selected', 'selected');
     $('#categoria option[value= ' + produto.idCategoria + ' ]').attr('selected', 'selected');

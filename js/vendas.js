@@ -47,6 +47,7 @@
         }
         return dy + "-" + mt + "-" + yr;
     }
+
     getDate().then(resp => {
 
         $("#Data").text(resp);
@@ -55,6 +56,7 @@
 
     $("#gif").append(gif);
     $("#gif").hide();
+    $('#alertProd').hide();
     /************************************************************************************************************************* */
     Array.prototype.duplicates = function () {
         return this.filter(function (x, y, k) {
@@ -111,10 +113,7 @@
             $optgroup.appendTo('#Produto_vendas'); // atribuui
             $.each(response, function (j, d) {
                 if (d.categoria == novoArray[i]) {
-                    $(`<option valor="${d.Valor_Venda}">`).val(d.idProduto).text(d.Descricao).appendTo($optgroup);
-                }
-                if (d.Descricao == "Ovo") {
-                    $('<option>').val(d.idProduto).text(d.Descricao).appendTo(selectbox3);
+                    $(`<option valor="${d.Valor_Venda}" cod="${d.codProduto}">`).val(d.idProduto).text(d.Descricao).appendTo($optgroup);
                 }
 
                 $('<option>').val(d.idProduto).text(d.Valor_Venda).appendTo(selectbox2);
@@ -135,6 +134,8 @@
     /**----------------------------------------------------------------------------------------------------- */
 
     $('#Produto_vendas').change(function () {
+
+
         idProduto = ($(this).val());
 
         $("#Valor_vendas").val($(this).val());
@@ -146,6 +147,7 @@
         valor = parseFloat($("#Valor_vendas :selected").text());
 
         soma = (quantidade * valor).toFixed(2);
+
         if (isNaN(soma)) {
             soma = 0
         }
@@ -469,7 +471,7 @@
     });
     /**----------------------------------------------------------------------------------------------------- */
     $("#modal-btn-sim").click(() => {
-     
+
         const post_url = "https://kd-gerenciador.herokuapp.com/vendas/concluir";
         // const post_url = "http://localhost:3000/vendas/concluir";
         $('#gif').show();
@@ -481,13 +483,13 @@
             data: Venda
 
         }).then(function (response) {
-          location.reload();
-/*
-            if (response.status != 200) {
-                alert(response.statusText)
-            } else {
+            location.reload();
+            /*
+                        if (response.status != 200) {
+                            alert(response.statusText)
+                        } else {
 
-            }*/
+                        }*/
         })
     });
 
@@ -619,3 +621,67 @@
         $('#TabelaComanda2').html("");
         // $('#MostrarVendaDiv').show()
     });
+
+    /**_______________________________________________________________________________________ */
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 1500; //time in ms, 1 second for example
+    $("#codProduto").on("keydown", () => {
+
+        clearTimeout(typingTimer);
+
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+
+
+    });
+
+    function setProdutos() {
+        idProduto = $("#Produto_vendas :selected").val();
+
+        $("#Valor_vendas").val($('#Produto_vendas').val());
+
+        quantidade = parseFloat($("#Quantidade_vendas").val());
+        valor = parseFloat($("#Valor_vendas :selected").text());
+
+        soma = (quantidade * valor).toFixed(2);
+
+        if (isNaN(soma)) {
+            soma = 0
+        };
+
+        $("#Subtotal_vendas").val(soma);
+        $(".sub_total").val(soma);
+
+        var selected = $("option:selected", this);
+    }
+
+    function doneTyping() {
+        let obj = {
+            filter: parseInt($('#codProduto').val())
+        };
+        //     let $options = $('#Produto_vendas').find('option');
+        //   alert($('#codProduto').val())
+        // $('#Produto_vendas').attr("cod", obj.Filter);
+
+        let opt = $('#Produto_vendas option').filter(function () {
+            // testa entre as options qual delas tem o mesmo conteúdo que o desejado
+
+            if ($(this).val() == "") {
+
+            } else {
+                // console.log(parseInt($(this).attr("cod")) )
+                if (parseInt($(this).attr("cod")) === obj.filter) {
+
+                    $('#alertProd').hide();
+                    return parseInt($(this).attr("cod")) === obj.filter;
+                } else {
+
+                    $('#Produto_vendas').val("");
+                    $('#Quantidade_vendas').val(1);
+                    // $('#alertProd').show();
+                }
+            }
+        });
+
+        opt.attr('selected', true);
+        setProdutos();
+    };

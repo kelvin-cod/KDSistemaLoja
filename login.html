@@ -165,8 +165,10 @@
                 password: ''
             }
 
-            obj.email = $("#email").val();
-            obj.password = $("#password").val();
+            //obj.email = $("#email").val();
+           // obj.password = $("#password").val();
+            obj.email = 'teste@mail.com'
+            obj.password = '123'
 
             if (obj.email == "") {
                 return $("#errorModal").modal("show")
@@ -177,7 +179,7 @@
 
             let post_url = "https://kd-gerenciador.herokuapp.com/user/login";
             $("#imgLoad").show();
-
+/*
             $.ajax({
                     url: post_url,
                     type: 'POST',
@@ -199,7 +201,9 @@
                 });
         });
 
-
+*/
+                sessionStorage.setItem("user",{user: "teste"});
+                        window.location.href = "index.html";
         $(document).ready(function () {
 
             var remember = $.cookie('remember');
